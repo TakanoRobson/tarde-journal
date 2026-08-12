@@ -1,71 +1,1420 @@
 <!doctype html>
-<html lang="pt-BR"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b1020"><link rel="manifest" href="manifest.json"><title>Trade Journal Pro</title>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1020">
+<link rel="manifest" href="manifest.json">
+<title>Trade Journal Pro</title>
+
 <style>
-:root{--bg:#080d18;--card:#111a2d;--card2:#17233b;--text:#eef3ff;--muted:#8996b4;--line:#26334f;--blue:#4e8cff;--green:#35d58a;--red:#ff6378;--yellow:#ffc857}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-main{max-width:760px;margin:auto;padding:16px 14px 90px}.top{display:flex;justify-content:space-between;align-items:center;margin:4px 0 15px}.logo{font-weight:850;font-size:22px}.logo b{color:var(--blue)}button{border:0;border-radius:12px;padding:11px 14px;font-weight:750;color:white;background:var(--blue)}.secondary{background:var(--card2)}.danger{background:#3a1820;color:#ff9baa}
-.nav{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}.nav button{background:var(--card);color:var(--muted)}.nav button.on{background:var(--blue);color:white}
-.view{display:none}.view.on{display:block}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.stat,.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}.stat small{color:var(--muted);font-size:11px}.stat strong{display:block;font-size:24px;margin-top:4px}.green{color:var(--green)}.red{color:var(--red)}.muted{color:var(--muted)}
-.card{margin-top:10px}.card h3{margin:0 0 11px;font-size:15px}
-.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.quick button{padding:14px;background:var(--card2);text-align:left}.quick button span{display:block;color:var(--muted);font-size:11px;margin-top:3px}
-form{display:grid;gap:9px}.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.field label{display:block;color:var(--muted);font-size:11px;margin:0 0 5px}input,select,textarea{width:100%;border:1px solid var(--line);background:#0c1425;color:var(--text);border-radius:10px;padding:11px;font-size:14px}textarea{min-height:75px}.checks{display:flex;flex-wrap:wrap;gap:6px}.check{border:1px solid var(--line);background:#0c1425;padding:8px 9px;border-radius:9px;font-size:12px}.check input{width:auto;margin-right:4px}
-.bar{margin:10px 0}.barhead{display:flex;justify-content:space-between;font-size:12px}.track{height:9px;background:#202b43;border-radius:10px;margin-top:5px;overflow:hidden}.fill{height:100%;border-radius:10px}
-table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:9px 5px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:var(--muted)}
-.filters{display:grid;grid-template-columns:1fr 1fr;gap:7px}.empty{text-align:center;padding:25px;color:var(--muted)}
-canvas{width:100%;height:180px;background:#0c1425;border-radius:12px}
-.install{display:none;width:100%;margin-bottom:10px}
-@media(min-width:650px){.stats{grid-template-columns:repeat(4,1fr)}.quick{grid-template-columns:repeat(4,1fr)}}
-</style></head>
-<body><main>
-<div class="top"><div class="logo">Trade<b>Journal</b> Pro <small class="muted">V2</small></div><button onclick="view('new')">＋ Trade</button></div>
-<button id="install" class="install">📲 Instalar na tela inicial</button>
-<div class="nav"><button data-v="dash" class="on" onclick="view('dash')">Dashboard</button><button data-v="new" onclick="view('new')">Registrar</button><button data-v="list" onclick="view('list')">Trades</button></div>
+:root{
+--bg:#080d18;--card:#111a2d;--card2:#17233b;
+--text:#eef3ff;--muted:#8996b4;--line:#26334f;
+--blue:#4e8cff;--green:#35d58a;--red:#ff6378;--yellow:#ffc857
+}
+
+*{box-sizing:border-box}
+
+body{
+margin:0;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+}
+
+main{
+max-width:760px;margin:auto;padding:16px 14px 90px
+}
+
+.top{
+display:flex;justify-content:space-between;align-items:center;
+gap:10px;margin:4px 0 12px
+}
+
+.logo{font-weight:850;font-size:22px}
+.logo b{color:var(--blue)}
+
+button{
+border:0;border-radius:12px;padding:11px 14px;
+font-weight:750;color:white;background:var(--blue);
+cursor:pointer
+}
+
+.secondary{background:var(--card2)}
+.danger{background:#3a1820;color:#ff9baa}
+
+.account{
+background:var(--card);
+border:1px solid var(--line);
+border-radius:14px;
+padding:10px;
+margin-bottom:12px
+}
+
+.account-row{
+display:flex;
+align-items:center;
+gap:8px
+}
+
+.account-row select{
+flex:1;
+font-weight:700
+}
+
+.account-row button{
+padding:10px 12px
+}
+
+.nav{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:7px;margin-bottom:12px
+}
+
+.nav button{
+background:var(--card);
+color:var(--muted)
+}
+
+.nav button.on{
+background:var(--blue);
+color:white
+}
+
+.view{display:none}
+.view.on{display:block}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:9px
+}
+
+.stat,.card{
+background:var(--card);
+border:1px solid var(--line);
+border-radius:16px;
+padding:14px
+}
+
+.stat small{
+color:var(--muted);
+font-size:11px
+}
+
+.stat strong{
+display:block;
+font-size:24px;
+margin-top:4px
+}
+
+.green{color:var(--green)}
+.red{color:var(--red)}
+.muted{color:var(--muted)}
+
+.card{margin-top:10px}
+.card h3{margin:0 0 11px;font-size:15px}
+
+.quick{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:8px
+}
+
+.quick button{
+padding:14px;
+background:var(--card2);
+text-align:left
+}
+
+.quick button span{
+display:block;
+color:var(--muted);
+font-size:11px;
+margin-top:3px
+}
+
+form{display:grid;gap:9px}
+
+.row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px
+}
+
+.field label{
+display:block;
+color:var(--muted);
+font-size:11px;
+margin:0 0 5px
+}
+
+input,select,textarea{
+width:100%;
+border:1px solid var(--line);
+background:#0c1425;
+color:var(--text);
+border-radius:10px;
+padding:11px;
+font-size:14px
+}
+
+textarea{min-height:75px}
+
+.checks{
+display:flex;
+flex-wrap:wrap;
+gap:6px
+}
+
+.check{
+border:1px solid var(--line);
+background:#0c1425;
+padding:8px 9px;
+border-radius:9px;
+font-size:12px
+}
+
+.check input{
+width:auto;
+margin-right:4px
+}
+
+.bar{margin:10px 0}
+
+.barhead{
+display:flex;
+justify-content:space-between;
+font-size:12px
+}
+
+.track{
+height:9px;
+background:#202b43;
+border-radius:10px;
+margin-top:5px;
+overflow:hidden
+}
+
+.fill{
+height:100%;
+border-radius:10px
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+font-size:12px
+}
+
+th,td{
+text-align:left;
+padding:9px 5px;
+border-bottom:1px solid var(--line);
+white-space:nowrap
+}
+
+th{color:var(--muted)}
+
+.filters{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:7px
+}
+
+.empty{
+text-align:center;
+padding:25px;
+color:var(--muted)
+}
+
+canvas{
+width:100%;
+height:180px;
+background:#0c1425;
+border-radius:12px
+}
+
+.install{
+display:none;
+width:100%;
+margin-bottom:10px
+}
+
+.account-actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:9px
+}
+
+.account-info{
+font-size:11px;
+color:var(--muted);
+margin-top:7px
+}
+
+@media(min-width:650px){
+.stats{grid-template-columns:repeat(4,1fr)}
+.quick{grid-template-columns:repeat(4,1fr)}
+}
+</style>
+</head>
+
+<body>
+
+<main>
+
+<div class="top">
+<div class="logo">
+Trade<b>Journal</b> Pro <small class="muted">V2.1</small>
+</div>
+
+<button onclick="view('new')">＋ Trade</button>
+</div>
+
+<button id="install" class="install">
+📲 Instalar na tela inicial
+</button>
+
+<!-- CONTAS -->
+<div class="account">
+
+<div class="account-row">
+
+<div style="font-size:20px">🏦</div>
+
+<select id="accountSelect"></select>
+
+<button class="secondary" onclick="newAccount()">
+＋ Conta
+</button>
+
+</div>
+
+<div class="account-info" id="accountInfo">
+Conta ativa
+</div>
+
+</div>
+
+<div class="nav">
+
+<button data-v="dash" class="on" onclick="view('dash')">
+Dashboard
+</button>
+
+<button data-v="new" onclick="view('new')">
+Registrar
+</button>
+
+<button data-v="list" onclick="view('list')">
+Trades
+</button>
+
+</div>
+
+
+<!-- DASHBOARD -->
 
 <section id="dash" class="view on">
+
 <div class="stats">
-<div class="stat"><small>TRADES</small><strong id="n">0</strong></div><div class="stat"><small>WIN RATE</small><strong id="wr">0%</strong></div><div class="stat"><small>RESULTADO</small><strong id="rr">0R</strong></div><div class="stat"><small>PROFIT FACTOR</small><strong id="pf">0</strong></div>
+
+<div class="stat">
+<small>TRADES</small>
+<strong id="n">0</strong>
 </div>
-<div class="card"><h3>📈 Equity curve</h3><canvas id="chart"></canvas></div>
-<div class="card"><h3>🏆 Melhor operacional</h3><div id="setupBars"></div></div>
-<div class="card"><h3>💰 Ativos</h3><div id="assetBars"></div></div>
-<div class="card"><h3>🕒 Sessões</h3><div id="sessionBars"></div></div>
-<div class="card"><h3>🧠 Disciplina</h3><div id="discipline"></div></div>
+
+<div class="stat">
+<small>WIN RATE</small>
+<strong id="wr">0%</strong>
+</div>
+
+<div class="stat">
+<small>RESULTADO</small>
+<strong id="rr">0R</strong>
+</div>
+
+<div class="stat">
+<small>PROFIT FACTOR</small>
+<strong id="pf">0</strong>
+</div>
+
+</div>
+
+
+<div class="card">
+<h3>📈 Equity curve</h3>
+<canvas id="chart"></canvas>
+</div>
+
+
+<div class="card">
+<h3>🏆 Melhor operacional</h3>
+<div id="setupBars"></div>
+</div>
+
+
+<div class="card">
+<h3>💰 Ativos</h3>
+<div id="assetBars"></div>
+</div>
+
+
+<div class="card">
+<h3>🕒 Sessões</h3>
+<div id="sessionBars"></div>
+</div>
+
+
+<div class="card">
+<h3>🧠 Disciplina</h3>
+<div id="discipline"></div>
+</div>
+
 </section>
+
+
+<!-- NOVO TRADE -->
 
 <section id="new" class="view">
-<div class="card"><h3>Registro rápido</h3>
+
+<div class="card">
+
+<h3>Registro rápido</h3>
+
 <form id="form">
-<div class="row"><div class="field"><label>Ativo</label><select id="asset"><option>XAUUSD</option><option>US100</option><option>BTC</option><option>ETH</option><option>SOL</option><option>Outro</option></select></div><div class="field"><label>Direção</label><select id="side"><option>Compra</option><option>Venda</option></select></div></div>
-<div class="row"><div class="field"><label>Setup</label><select id="setup"><option>BOS + Reteste</option><option>Sweep + BOS</option><option>BOS + FVG</option><option>FVG</option><option>Order Block</option><option>Wyckoff</option><option>Divergência RSI</option><option>Outro</option></select></div><div class="field"><label>Timeframe</label><select id="tf"><option>5m</option><option>15m</option><option>1H</option><option>4H</option></select></div></div>
-<div class="row"><div class="field"><label>Sessão</label><select id="session"><option>Ásia</option><option>Londres</option><option>Nova York</option><option>Sobreposição Londres/NY</option></select></div><div class="field"><label>Resultado (R)</label><input id="r" type="number" step=".1" placeholder="+2 / -1" required></div></div>
-<div class="row"><div class="field"><label>Plano</label><select id="plan"><option>Sim</option><option>Não</option></select></div><div class="field"><label>Dinheiro (opcional)</label><input id="money" type="number" step=".01" placeholder="¥ / $"></div></div>
-<div class="field"><label>Condições</label><div class="checks">
-<label class="check"><input type="checkbox" value="Liquidez">Liquidez</label><label class="check"><input type="checkbox" value="BOS">BOS</label><label class="check"><input type="checkbox" value="FVG">FVG</label><label class="check"><input type="checkbox" value="OB">OB</label><label class="check"><input type="checkbox" value="Volume">Volume</label><label class="check"><input type="checkbox" value="Pavio">Pavio</label><label class="check"><input type="checkbox" value="POI">POI 1H/4H</label>
-</div></div>
-<div class="field"><label>Observação</label><textarea id="note" placeholder="Erro, saída antecipada, FOMO..."></textarea></div>
-<button type="submit">Salvar trade</button>
-</form></div>
+
+<div class="row">
+
+<div class="field">
+<label>Ativo</label>
+
+<select id="asset">
+<option>XAUUSD</option>
+<option>US100</option>
+<option>BTC</option>
+<option>ETH</option>
+<option>SOL</option>
+<option>Outro</option>
+</select>
+
+</div>
+
+<div class="field">
+<label>Direção</label>
+
+<select id="side">
+<option>Compra</option>
+<option>Venda</option>
+</select>
+
+</div>
+
+</div>
+
+
+<div class="row">
+
+<div class="field">
+<label>Setup</label>
+
+<select id="setup">
+<option>BOS + Reteste</option>
+<option>Sweep + BOS</option>
+<option>BOS + FVG</option>
+<option>FVG</option>
+<option>Order Block</option>
+<option>Wyckoff</option>
+<option>Divergência RSI</option>
+<option>Outro</option>
+</select>
+
+</div>
+
+
+<div class="field">
+<label>Timeframe</label>
+
+<select id="tf">
+<option>5m</option>
+<option>15m</option>
+<option>1H</option>
+<option>4H</option>
+</select>
+
+</div>
+
+</div>
+
+
+<div class="row">
+
+<div class="field">
+<label>Sessão</label>
+
+<select id="session">
+<option>Ásia</option>
+<option>Londres</option>
+<option>Nova York</option>
+<option>Sobreposição Londres/NY</option>
+</select>
+
+</div>
+
+
+<div class="field">
+<label>Resultado (R)</label>
+
+<input id="r"
+type="number"
+step=".1"
+placeholder="+2 / -1"
+required>
+
+</div>
+
+</div>
+
+
+<div class="row">
+
+<div class="field">
+<label>Plano</label>
+
+<select id="plan">
+<option>Sim</option>
+<option>Não</option>
+</select>
+
+</div>
+
+
+<div class="field">
+<label>Dinheiro (opcional)</label>
+
+<input
+id="money"
+type="number"
+step=".01"
+placeholder="¥ / $">
+
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>Condições</label>
+
+<div class="checks">
+
+<label class="check">
+<input type="checkbox" value="Liquidez">
+Liquidez
+</label>
+
+<label class="check">
+<input type="checkbox" value="BOS">
+BOS
+</label>
+
+<label class="check">
+<input type="checkbox" value="FVG">
+FVG
+</label>
+
+<label class="check">
+<input type="checkbox" value="OB">
+OB
+</label>
+
+<label class="check">
+<input type="checkbox" value="Volume">
+Volume
+</label>
+
+<label class="check">
+<input type="checkbox" value="Pavio">
+Pavio
+</label>
+
+<label class="check">
+<input type="checkbox" value="POI">
+POI 1H/4H
+</label>
+
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>Observação</label>
+
+<textarea
+id="note"
+placeholder="Erro, saída antecipada, FOMO...">
+</textarea>
+
+</div>
+
+
+<button type="submit">
+Salvar trade
+</button>
+
+</form>
+
+</div>
+
 </section>
 
-<section id="list" class="view"><div class="card"><h3>🔎 Filtros</h3><div class="filters"><select id="fa"><option value="">Ativo</option></select><select id="fs"><option value="">Setup</option></select><select id="fss"><option value="">Sessão</option></select><select id="fp"><option value="">Plano</option><option>Sim</option><option>Não</option></select></div></div><div class="card" id="table"></div><div class="card"><button class="secondary" onclick="exportData()">⬇️ Exportar backup</button> <button class="danger" onclick="wipe()">Apagar dados</button></div></section>
+
+<!-- TRADES -->
+
+<section id="list" class="view">
+
+<div class="card">
+
+<h3>🔎 Filtros</h3>
+
+<div class="filters">
+
+<select id="fa">
+<option value="">Ativo</option>
+</select>
+
+<select id="fs">
+<option value="">Setup</option>
+</select>
+
+<select id="fss">
+<option value="">Sessão</option>
+</select>
+
+<select id="fp">
+<option value="">Plano</option>
+<option>Sim</option>
+<option>Não</option>
+</select>
+
+</div>
+
+</div>
+
+
+<div class="card" id="table"></div>
+
+
+<div class="card">
+
+<button class="secondary" onclick="exportData()">
+⬇️ Exportar backup
+</button>
+
+<button class="danger" onclick="wipe()">
+Apagar dados desta conta
+</button>
+
+</div>
+
+</section>
+
 </main>
+
+
 <script>
-const KEY='tjp_v2';let data=JSON.parse(localStorage.getItem(KEY)||'[]');
-function save(){localStorage.setItem(KEY,JSON.stringify(data))}
-function view(id){document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));document.getElementById(id).classList.add('on');document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('on',x.dataset.v===id));render()}
-function st(a){let w=a.filter(x=>x.r>0),l=a.filter(x=>x.r<0),gw=w.reduce((s,x)=>s+x.r,0),gl=Math.abs(l.reduce((s,x)=>s+x.r,0));return{n:a.length,w:a.length?w.length/a.length*100:0,r:a.reduce((s,x)=>s+x.r,0),pf:gl?gw/gl:0}}
-function groups(key){let o={};data.forEach(x=>(o[x[key]]??=[]).push(x));return o}
-function bars(id,o){let el=document.getElementById(id),es=Object.entries(o);if(!es.length){el.innerHTML='<div class="empty">Sem dados ainda.</div>';return}let mx=Math.max(1,...es.map(e=>Math.abs(st(e[1]).r)));el.innerHTML=es.sort((a,b)=>st(b[1]).r-st(a[1]).r).map(([k,a])=>{let s=st(a),p=Math.min(100,Math.abs(s.r)/mx*100);return `<div class="bar"><div class="barhead"><span>${k}</span><b class="${s.r>=0?'green':'red'}">${s.r>0?'+':''}${s.r.toFixed(1)}R · ${s.w.toFixed(0)}%</b></div><div class="track"><div class="fill" style="width:${p}%;background:${s.r>=0?'var(--green)':'var(--red)'}"></div></div></div>`}).join('')}
-function render(){let s=st(data);n.textContent=s.n;wr.textContent=s.w.toFixed(1)+'%';rr.textContent=(s.r>=0?'+':'')+s.r.toFixed(1)+'R';rr.className=s.r>=0?'green':'red';pf.textContent=s.pf?s.pf.toFixed(2):'0';bars('setupBars',groups('setup'));bars('assetBars',groups('asset'));bars('sessionBars',groups('session'));let bad=data.filter(x=>x.plan==='Não').length;discipline.innerHTML=`Seguiu o plano: <b class="green">${data.length?((data.length-bad)/data.length*100).toFixed(1):0}%</b><br><span class="muted">${bad} trade(s) fora do plano</span>`;draw();fill();filterTable()}
-function draw(){let c=chart,x=c.getContext('2d'),d=devicePixelRatio||1,w=c.clientWidth*d,h=c.clientHeight*d;c.width=w;c.height=h;x.clearRect(0,0,w,h);x.strokeStyle='#26334f';x.beginPath();x.moveTo(0,h/2);x.lineTo(w,h/2);x.stroke();if(!data.length)return;let vals=[0],sum=0;data.slice().reverse().forEach(t=>{sum+=t.r;vals.push(sum)});let min=Math.min(...vals),max=Math.max(...vals),range=max-min||1;x.strokeStyle='#4e8cff';x.lineWidth=3;x.beginPath();vals.forEach((v,i)=>{let px=i/(vals.length-1||1)*w,py=h-((v-min)/range)*h*.8-h*.1;i?x.lineTo(px,py):x.moveTo(px,py)});x.stroke()}
-function fill(){[['fa','asset'],['fs','setup'],['fss','session']].forEach(([id,k])=>{let e=document.getElementById(id),cur=e.value,vs=[...new Set(data.map(x=>x[k]))];e.innerHTML='<option value="">Todos</option>'+vs.map(v=>`<option>${v}</option>`).join('');e.value=cur})}
-function filterTable(){let a=data.filter(x=>(!fa.value||x.asset===fa.value)&&(!fs.value||x.setup===fs.value)&&(!fss.value||x.session===fss.value)&&(!fp.value||x.plan===fp.value));if(!a.length){table.innerHTML='<div class="empty">Nenhum trade.</div>';return}table.innerHTML=`<div style="overflow:auto"><table><tr><th>Data</th><th>Ativo</th><th>Setup</th><th>R</th><th>Plano</th></tr>${a.map(x=>`<tr><td>${x.date}</td><td>${x.asset}</td><td>${x.setup}</td><td class="${x.r>0?'green':x.r<0?'red':''}">${x.r>0?'+':''}${x.r.toFixed(1)}R</td><td>${x.plan}</td></tr>`).join('')}</table></div>`}
-form.addEventListener('submit',e=>{e.preventDefault();let c=[...document.querySelectorAll('.check input:checked')].map(x=>x.value);data.unshift({id:Date.now(),date:new Date().toISOString().slice(0,10),asset:asset.value,side:side.value,setup:setup.value,tf:tf.value,session:session.value,r:+r.value,plan:plan.value,money:+(money.value||0),conditions:c,note:note.value});save();e.target.reset();alert('Trade salvo!');view('dash')});
-['fa','fs','fss','fp'].forEach(id=>document.getElementById(id).addEventListener('change',filterTable));
-function exportData(){let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='trade-journal-backup.json';a.click()}
-function wipe(){if(confirm('Apagar todos os trades?')){data=[];save();render()}}
-let deferred;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;install.style.display='block';install.onclick=()=>{deferred.prompt();deferred=null}});
+
+/* =========================
+   SISTEMA DE CONTAS
+========================= */
+
+const ACCOUNTS_KEY='tjp_accounts_v21';
+const OLD_KEY='tjp_v2';
+
+let accounts;
+let currentAccountId;
+
+
+/* CARREGAR CONTAS */
+
+function loadAccounts(){
+
+const saved=localStorage.getItem(ACCOUNTS_KEY);
+
+if(saved){
+
+accounts=JSON.parse(saved);
+
+}else{
+
+const oldData=JSON.parse(
+localStorage.getItem(OLD_KEY)||'[]'
+);
+
+accounts=[
+{
+id:'account_1',
+name:'Conta 1',
+trades:oldData
+},
+{
+id:'account_2',
+name:'Conta 2',
+trades:[]
+}
+];
+
+saveAccounts();
+
+}
+
+currentAccountId=localStorage.getItem('tjp_current_account');
+
+if(!accounts.some(a=>a.id===currentAccountId)){
+currentAccountId=accounts[0].id;
+localStorage.setItem('tjp_current_account',currentAccountId);
+}
+
+}
+
+
+/* SALVAR */
+
+function saveAccounts(){
+
+localStorage.setItem(
+ACCOUNTS_KEY,
+JSON.stringify(accounts)
+);
+
+}
+
+
+/* CONTA ATUAL */
+
+function currentAccount(){
+
+return accounts.find(
+a=>a.id===currentAccountId
+);
+
+}
+
+
+/* TRADES DA CONTA */
+
+function getData(){
+
+return currentAccount().trades;
+
+}
+
+
+/* TROCAR CONTA */
+
+function changeAccount(){
+
+currentAccountId=accountSelect.value;
+
+localStorage.setItem(
+'tjp_current_account',
+currentAccountId
+);
+
 render();
-</script></body></html>
+
+}
+
+
+/* NOVA CONTA */
+
+function newAccount(){
+
+let name=prompt(
+'Nome da nova conta:',
+'Conta '+(accounts.length+1)
+);
+
+if(!name)return;
+
+name=name.trim();
+
+if(!name)return;
+
+const account={
+id:'account_'+Date.now(),
+name:name,
+trades:[]
+};
+
+accounts.push(account);
+
+saveAccounts();
+
+currentAccountId=account.id;
+
+localStorage.setItem(
+'tjp_current_account',
+currentAccountId
+);
+
+render();
+
+alert('Conta criada com sucesso!');
+
+}
+
+
+/* PREENCHER SELETOR */
+
+function renderAccounts(){
+
+accountSelect.innerHTML=accounts
+.map(a=>`<option value="${a.id}">
+${a.name}
+</option>`)
+.join('');
+
+accountSelect.value=currentAccountId;
+
+accountInfo.textContent=
+'Conta ativa: '+currentAccount().name+
+' · '+getData().length+' trade(s)';
+
+}
+
+
+/* =========================
+   SISTEMA ORIGINAL
+========================= */
+
+function save(){
+
+saveAccounts();
+
+renderAccounts();
+
+}
+
+
+function view(id){
+
+document
+.querySelectorAll('.view')
+.forEach(x=>x.classList.remove('on'));
+
+document
+.getElementById(id)
+.classList.add('on');
+
+document
+.querySelectorAll('.nav button')
+.forEach(x=>
+x.classList.toggle(
+'on',
+x.dataset.v===id
+)
+);
+
+render();
+
+}
+
+
+function st(a){
+
+let w=a.filter(x=>x.r>0);
+
+let l=a.filter(x=>x.r<0);
+
+let gw=w.reduce(
+(s,x)=>s+x.r,0
+);
+
+let gl=Math.abs(
+l.reduce((s,x)=>s+x.r,0)
+);
+
+return{
+
+n:a.length,
+
+w:a.length
+?w.length/a.length*100
+:0,
+
+r:a.reduce(
+(s,x)=>s+x.r,0
+),
+
+pf:gl
+?gw/gl
+:0
+
+};
+
+}
+
+
+function groups(key){
+
+let o={};
+
+getData().forEach(
+x=>(o[x[key]]??=[]).push(x)
+);
+
+return o;
+
+}
+
+
+function bars(id,o){
+
+let el=document.getElementById(id);
+
+let es=Object.entries(o);
+
+if(!es.length){
+
+el.innerHTML=
+'<div class="empty">Sem dados ainda.</div>';
+
+return;
+
+}
+
+let mx=Math.max(
+1,
+...es.map(
+e=>Math.abs(st(e[1]).r)
+)
+);
+
+el.innerHTML=
+
+es
+.sort(
+(a,b)=>st(b[1]).r-st(a[1]).r
+)
+.map(
+([k,a])=>{
+
+let s=st(a);
+
+let p=Math.min(
+100,
+Math.abs(s.r)/mx*100
+);
+
+return `
+
+<div class="bar">
+
+<div class="barhead">
+
+<span>${k}</span>
+
+<b class="${s.r>=0?'green':'red'}">
+
+${s.r>0?'+':''}${s.r.toFixed(1)}R
+
+· ${s.w.toFixed(0)}%
+
+</b>
+
+</div>
+
+<div class="track">
+
+<div
+class="fill"
+style="
+width:${p}%;
+background:${s.r>=0
+?'var(--green)'
+:'var(--red)'};
+">
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+)
+.join('');
+
+}
+
+
+/* DASHBOARD */
+
+function render(){
+
+renderAccounts();
+
+let data=getData();
+
+let s=st(data);
+
+n.textContent=s.n;
+
+wr.textContent=
+s.w.toFixed(1)+'%';
+
+rr.textContent=
+(s.r>=0?'+':'')+
+s.r.toFixed(1)+'R';
+
+rr.className=
+s.r>=0
+?'green'
+:'red';
+
+pf.textContent=
+s.pf
+?s.pf.toFixed(2)
+:'0';
+
+bars(
+'setupBars',
+groups('setup')
+);
+
+bars(
+'assetBars',
+groups('asset')
+);
+
+bars(
+'sessionBars',
+groups('session')
+);
+
+let bad=
+data.filter(
+x=>x.plan==='Não'
+).length;
+
+discipline.innerHTML=
+
+`Seguiu o plano:
+<b class="green">
+
+${data.length
+?((data.length-bad)/data.length*100)
+.toFixed(1)
+:0}%
+
+</b>
+
+<br>
+
+<span class="muted">
+
+${bad} trade(s) fora do plano
+
+</span>`;
+
+draw();
+
+fill();
+
+filterTable();
+
+}
+
+
+/* GRÁFICO */
+
+function draw(){
+
+let c=chart;
+
+let x=c.getContext('2d');
+
+let d=devicePixelRatio||1;
+
+let w=c.clientWidth*d;
+
+let h=c.clientHeight*d;
+
+c.width=w;
+
+c.height=h;
+
+x.clearRect(
+0,0,w,h
+);
+
+x.strokeStyle='#26334f';
+
+x.beginPath();
+
+x.moveTo(0,h/2);
+
+x.lineTo(w,h/2);
+
+x.stroke();
+
+let data=getData();
+
+if(!data.length)return;
+
+let vals=[0];
+
+let sum=0;
+
+data
+.slice()
+.reverse()
+.forEach(t=>{
+
+sum+=t.r;
+
+vals.push(sum);
+
+});
+
+let min=Math.min(...vals);
+
+let max=Math.max(...vals);
+
+let range=max-min||1;
+
+x.strokeStyle='#4e8cff';
+
+x.lineWidth=3;
+
+x.beginPath();
+
+vals.forEach(
+(v,i)=>{
+
+let px=
+i/(vals.length-1||1)*w;
+
+let py=
+h-
+((v-min)/range)*h*.8-
+h*.1;
+
+i
+?x.lineTo(px,py)
+:x.moveTo(px,py);
+
+});
+
+x.stroke();
+
+}
+
+
+/* FILTROS */
+
+function fill(){
+
+let data=getData();
+
+[
+['fa','asset'],
+['fs','setup'],
+['fss','session']
+]
+.forEach(
+([id,k])=>{
+
+let e=
+document.getElementById(id);
+
+let cur=e.value;
+
+let vs=[
+...new Set(
+data.map(x=>x[k])
+)
+];
+
+e.innerHTML=
+'<option value="">Todos</option>'+
+vs.map(
+v=>`<option>${v}</option>`
+).join('');
+
+e.value=cur;
+
+});
+
+}
+
+
+/* TABELA */
+
+function filterTable(){
+
+let data=getData();
+
+let a=data.filter(
+x=>
+(!fa.value||x.asset===fa.value)&&
+(!fs.value||x.setup===fs.value)&&
+(!fss.value||x.session===fss.value)&&
+(!fp.value||x.plan===fp.value)
+);
+
+if(!a.length){
+
+table.innerHTML=
+'<div class="empty">Nenhum trade.</div>';
+
+return;
+
+}
+
+table.innerHTML=
+
+`<div style="overflow:auto">
+
+<table>
+
+<tr>
+<th>Data</th>
+<th>Ativo</th>
+<th>Setup</th>
+<th>R</th>
+<th>Plano</th>
+</tr>
+
+${a.map(
+x=>`
+
+<tr>
+
+<td>${x.date}</td>
+
+<td>${x.asset}</td>
+
+<td>${x.setup}</td>
+
+<td class="${x.r>0
+?'green'
+:x.r<0
+?'red'
+:''}">
+
+${x.r>0?'+':''}
+${x.r.toFixed(1)}R
+
+</td>
+
+<td>${x.plan}</td>
+
+</tr>
+
+`
+).join('')}
+
+</table>
+
+</div>`;
+
+}
+
+
+/* SALVAR TRADE */
+
+form.addEventListener(
+'submit',
+e=>{
+
+e.preventDefault();
+
+let data=getData();
+
+let c=[
+...document.querySelectorAll(
+'.check input:checked'
+)
+.map(x=>x.value);
+
+data.unshift({
+
+id:Date.now(),
+
+date:
+new Date()
+.toISOString()
+.slice(0,10),
+
+asset:asset.value,
+
+side:side.value,
+
+setup:setup.value,
+
+tf:tf.value,
+
+session:session.value,
+
+r:+r.value,
+
+plan:plan.value,
+
+money:+(
+money.value||0
+),
+
+conditions:c,
+
+note:note.value
+
+});
+
+saveAccounts();
+
+e.target.reset();
+
+alert(
+'Trade salvo em '+currentAccount().name+'!'
+);
+
+view('dash');
+
+});
+
+
+/* FILTROS */
+
+['fa','fs','fss','fp']
+.forEach(
+id=>
+document
+.getElementById(id)
+.addEventListener(
+'change',
+filterTable
+)
+);
+
+
+/* BACKUP */
+
+function exportData(){
+
+let backup={
+version:'2.1',
+date:new Date().toISOString(),
+accounts:accounts
+};
+
+let blob=new Blob(
+[
+JSON.stringify(
+backup,
+null,
+2
+)
+],
+{
+type:'application/json'
+}
+);
+
+let a=
+document.createElement('a');
+
+a.href=
+URL.createObjectURL(blob);
+
+a.download=
+'trade-journal-backup-multi-contas.json';
+
+a.click();
+
+}
+
+
+/* APAGAR CONTA */
+
+function wipe(){
+
+let data=getData();
+
+if(!data.length){
+
+alert(
+'Esta conta não possui trades.'
+);
+
+return;
+
+}
+
+if(
+confirm(
+'Apagar TODOS os trades da conta "'+
+currentAccount().name+
+'"?'
+)
+){
+
+currentAccount().trades=[];
+
+saveAccounts();
+
+render();
+
+}
+
+}
+
+
+/* INSTALAÇÃO PWA */
+
+let deferred;
+
+window.addEventListener(
+'beforeinstallprompt',
+e=>{
+
+e.preventDefault();
+
+deferred=e;
+
+install.style.display='block';
+
+install.onclick=()=>{
+
+deferred.prompt();
+
+deferred=null;
+
+};
+
+}
+);
+
+
+/* INICIALIZAÇÃO */
+
+loadAccounts();
+
+accountSelect.addEventListener(
+'change',
+changeAccount
+);
+
+render();
+
+</script>
+
+</body>
+</html>
