@@ -1,72 +1,59 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#080d18">
-<link rel="manifest" href="manifest.json">
-<title>TESTE ROBSON</title>
-<style>
-:root{
---bg:#080d18;
---card:#111a2d;
---card2:#17233b;
---text:#eef3ff;
---muted:#8996b4;
---line:#26334f;
---blue:#4e8cff;
---green:#35d58a;
---red:#ff6378;
-}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trade Journal Pro</title>
 
+<style>
 *{box-sizing:border-box}
 
 body{
 margin:0;
-background:var(--bg);
-color:var(--text);
+background:#080d18;
+color:#eef3ff;
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
 }
 
 main{
 max-width:760px;
 margin:auto;
-padding:16px 14px 90px
+padding:16px 14px 80px
 }
 
 button{
 border:0;
-border-radius:12px;
+border-radius:10px;
 padding:11px 14px;
-font-weight:750;
+font-weight:700;
 color:white;
-background:var(--blue);
+background:#4e8cff;
 cursor:pointer
 }
 
-.secondary{
-background:var(--card2)
-}
-
-.danger{
+button.danger{
 background:#3a1820;
 color:#ff9baa
+}
+
+button.secondary{
+background:#17233b
 }
 
 .top{
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:14px
+margin-bottom:15px
 }
 
 .logo{
-font-weight:850;
-font-size:22px
+font-size:22px;
+font-weight:800
 }
 
-.logo b{
-color:var(--blue)
+.logo span{
+color:#4e8cff
 }
 
 .nav{
@@ -77,125 +64,69 @@ margin-bottom:12px
 }
 
 .nav button{
-background:var(--card);
-color:var(--muted)
+background:#111a2d;
+color:#8996b4
 }
 
-.nav button.on{
-background:var(--blue);
+.nav button.active{
+background:#4e8cff;
 color:white
 }
 
-.view{
+.page{
 display:none
 }
 
-.view.on{
+.page.active{
 display:block
 }
 
-.account{
-background:var(--card);
-border:1px solid var(--line);
-border-radius:14px;
-padding:10px;
-margin-bottom:12px
+.card{
+background:#111a2d;
+border:1px solid #26334f;
+border-radius:15px;
+padding:14px;
+margin-bottom:10px
 }
 
-.account-row{
-display:flex;
-gap:8px;
-align-items:center
-}
-
-.account-row select{
-flex:1
-}
-
-.account-info{
-font-size:11px;
-color:var(--muted);
-margin-top:7px
+.card h3{
+margin:0 0 12px
 }
 
 .stats{
 display:grid;
 grid-template-columns:repeat(2,1fr);
-gap:9px
+gap:8px
 }
 
-.stat,.card{
-background:var(--card);
-border:1px solid var(--line);
-border-radius:16px;
-padding:14px
+.stat{
+background:#111a2d;
+border:1px solid #26334f;
+border-radius:15px;
+padding:13px
 }
 
 .stat small{
-color:var(--muted);
+color:#8996b4;
 font-size:11px
 }
 
 .stat strong{
 display:block;
-font-size:24px;
-margin-top:4px
-}
-
-.card{
-margin-top:10px
-}
-
-.card h3{
-margin:0 0 11px;
-font-size:15px
-}
-
-.green{
-color:var(--green)
-}
-
-.red{
-color:var(--red)
-}
-
-.muted{
-color:var(--muted)
-}
-
-.money-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:9px
-}
-
-.money-card{
-background:var(--card2);
-border-radius:12px;
-padding:12px
-}
-
-.money-card small{
-display:block;
-color:var(--muted);
-font-size:10px
-}
-
-.money-card strong{
-display:block;
-font-size:19px;
+font-size:23px;
 margin-top:5px
 }
 
-.settings{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:9px
+.green{
+color:#35d58a
 }
 
-form{
-display:grid;
-gap:9px
+.red{
+color:#ff6378
+}
+
+.muted{
+color:#8996b4
 }
 
 .row{
@@ -204,79 +135,62 @@ grid-template-columns:1fr 1fr;
 gap:9px
 }
 
-.field label{
+.field{
+margin-bottom:9px
+}
+
+label{
 display:block;
-color:var(--muted);
 font-size:11px;
+color:#8996b4;
 margin-bottom:5px
 }
 
 input,select,textarea{
 width:100%;
-border:1px solid var(--line);
-background:#0c1425;
-color:var(--text);
-border-radius:10px;
 padding:11px;
+border-radius:9px;
+border:1px solid #26334f;
+background:#0c1425;
+color:#eef3ff;
 font-size:14px
 }
 
 textarea{
-min-height:75px
+min-height:80px
 }
 
-.checks{
+.account{
 display:flex;
-flex-wrap:wrap;
-gap:6px
+gap:8px;
+margin-bottom:12px
 }
 
-.check{
-border:1px solid var(--line);
-background:#0c1425;
-padding:8px 9px;
-border-radius:9px;
-font-size:12px
+.account select{
+flex:1
 }
 
-.check input{
-width:auto
+.money{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px
 }
 
-.bar{
-margin:10px 0
-}
-
-.barhead{
-display:flex;
-justify-content:space-between;
-font-size:12px
-}
-
-.track{
-height:9px;
-background:#202b43;
-border-radius:10px;
-margin-top:5px;
-overflow:hidden
-}
-
-.fill{
-height:100%;
+.money div{
+background:#17233b;
+padding:11px;
 border-radius:10px
 }
 
-canvas{
-width:100%;
-height:180px;
-background:#0c1425;
-border-radius:12px
+.money small{
+display:block;
+font-size:10px;
+color:#8996b4
 }
 
-.filters{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:7px
+.money strong{
+display:block;
+margin-top:4px
 }
 
 table{
@@ -286,39 +200,65 @@ font-size:12px
 }
 
 th,td{
+padding:8px 5px;
+border-bottom:1px solid #26334f;
 text-align:left;
-padding:9px 5px;
-border-bottom:1px solid var(--line);
 white-space:nowrap
 }
 
 th{
-color:var(--muted)
+color:#8996b4
+}
+
+.table-wrap{
+overflow:auto
 }
 
 .empty{
 text-align:center;
 padding:25px;
-color:var(--muted)
+color:#8996b4
 }
 
-.action{
-padding:7px 9px;
-margin-right:3px
+.actions{
+display:flex;
+gap:4px
 }
 
-.install{
-display:none;
+.actions button{
+padding:6px 8px
+}
+
+.checks{
+display:flex;
+flex-wrap:wrap;
+gap:5px
+}
+
+.check{
+background:#0c1425;
+border:1px solid #26334f;
+border-radius:8px;
+padding:7px 8px;
+font-size:11px;
+color:#eef3ff
+}
+
+.check input{
+width:auto
+}
+
+canvas{
 width:100%;
-margin-bottom:10px
+height:180px;
+background:#0c1425;
+border-radius:10px
 }
 
 @media(min-width:650px){
-
 .stats{
 grid-template-columns:repeat(4,1fr)
 }
-
 }
 </style>
 </head>
@@ -330,36 +270,25 @@ grid-template-columns:repeat(4,1fr)
 <div class="top">
 
 <div class="logo">
-Trade<b>Journal</b> Pro
-<small class="muted">V2.3</small>
+Trade<span>Journal</span> Pro
 </div>
 
-<button id="newTradeButton">＋ Trade</button>
-
-</div>
-
-<button id="installButton" class="install">
-📲 Instalar na tela inicial
+<button id="quickTrade">
+＋ Trade
 </button>
 
+</div>
 
-<!-- CONTAS -->
+
+<!-- CONTA -->
 
 <div class="account">
 
-<div class="account-row">
-
-<span>🏦</span>
-
 <select id="accountSelect"></select>
 
-<button id="newAccountButton" class="secondary">
+<button id="addAccount">
 ＋ Conta
 </button>
-
-</div>
-
-<div id="accountInfo" class="account-info"></div>
 
 </div>
 
@@ -368,15 +297,15 @@ Trade<b>Journal</b> Pro
 
 <div class="nav">
 
-<button class="on" data-view="dash">
+<button class="active" data-page="dashboard">
 Dashboard
 </button>
 
-<button data-view="new">
+<button data-page="register">
 Registrar
 </button>
 
-<button data-view="list">
+<button data-page="trades">
 Trades
 </button>
 
@@ -385,7 +314,7 @@ Trades
 
 <!-- DASHBOARD -->
 
-<section id="dash" class="view on">
+<section id="dashboard" class="page active">
 
 <div class="stats">
 
@@ -401,7 +330,7 @@ Trades
 
 <div class="stat">
 <small>RESULTADO</small>
-<strong id="rResult">0R</strong>
+<strong id="totalR">0R</strong>
 </div>
 
 <div class="stat">
@@ -414,40 +343,23 @@ Trades
 
 <div class="card">
 
-<h3>💰 Resultado financeiro</h3>
+<h3>💰 Financeiro</h3>
 
-<div class="money-grid">
+<div class="money">
 
-<div class="money-card">
-
+<div>
 <small>CAPITAL INICIAL</small>
-
-<strong id="initialCapital">
-$0.00
-</strong>
-
+<strong id="initialCapital">$0</strong>
 </div>
 
-
-<div class="money-card">
-
+<div>
 <small>RESULTADO</small>
-
-<strong id="financialResult">
-$0.00
-</strong>
-
+<strong id="moneyResult">$0</strong>
 </div>
 
-
-<div class="money-card">
-
+<div>
 <small>CAPITAL ATUAL</small>
-
-<strong id="currentCapital">
-$0.00
-</strong>
-
+<strong id="currentCapital">$0</strong>
 </div>
 
 </div>
@@ -459,44 +371,36 @@ $0.00
 
 <h3>⚙️ Configuração</h3>
 
-<div class="settings">
+<div class="row">
 
 <div class="field">
 
 <label>Moeda</label>
 
-<select id="currencySelect">
+<select id="currency">
 
-<option value="USD">
-USD — Dólar
-</option>
+<option value="USD">USD — Dólar</option>
 
-<option value="JPY">
-JPY — Iene
-</option>
+<option value="JPY">JPY — Iene</option>
 
 </select>
 
 </div>
-
 
 <div class="field">
 
 <label>Capital inicial</label>
 
 <input
-id="capitalInput"
+id="capital"
 type="number"
 step="0.01"
 placeholder="500">
-
 </div>
 
 </div>
 
-<br>
-
-<button id="saveSettingsButton">
+<button id="saveConfig">
 Salvar configuração
 </button>
 
@@ -507,43 +411,16 @@ Salvar configuração
 
 <h3>📈 Equity Curve</h3>
 
-<canvas id="equityChart"></canvas>
+<canvas id="chart"></canvas>
 
 </div>
 
 
 <div class="card">
 
-<h3>🏆 Melhor operacional</h3>
+<h3>🏆 Setups</h3>
 
-<div id="setupBars"></div>
-
-</div>
-
-
-<div class="card">
-
-<h3>💰 Ativos</h3>
-
-<div id="assetBars"></div>
-
-</div>
-
-
-<div class="card">
-
-<h3>🕒 Sessões</h3>
-
-<div id="sessionBars"></div>
-
-</div>
-
-
-<div class="card">
-
-<h3>🧠 Disciplina</h3>
-
-<div id="discipline"></div>
+<div id="setupStats"></div>
 
 </div>
 
@@ -552,11 +429,11 @@ Salvar configuração
 
 <!-- REGISTRAR -->
 
-<section id="new" class="view">
+<section id="register" class="page">
 
 <div class="card">
 
-<h3>Registro rápido</h3>
+<h3>📝 Novo Trade</h3>
 
 <form id="tradeForm">
 
@@ -624,10 +501,10 @@ Salvar configuração
 
 <select id="timeframe">
 
+<option>1m</option>
 <option>5m</option>
 <option>15m</option>
 <option>1H</option>
-<option>4H</option>
 
 </select>
 
@@ -647,7 +524,7 @@ Salvar configuração
 <option>Ásia</option>
 <option>Londres</option>
 <option>Nova York</option>
-<option>Sobreposição Londres/NY</option>
+<option>Londres/NY</option>
 
 </select>
 
@@ -656,13 +533,13 @@ Salvar configuração
 
 <div class="field">
 
-<label>Resultado R</label>
+<label>Resultado (R)</label>
 
 <input
-id="rValue"
+id="r"
 type="number"
 step="0.1"
-placeholder="+2 / -1"
+placeholder="+2 ou -1"
 required>
 
 </div>
@@ -737,11 +614,6 @@ Volume
 Pavio
 </label>
 
-<label class="check">
-<input type="checkbox" value="POI">
-POI 1H/4H
-</label>
-
 </div>
 
 </div>
@@ -753,13 +625,13 @@ POI 1H/4H
 
 <textarea
 id="note"
-placeholder="Erro, saída antecipada, FOMO..."></textarea>
+placeholder="Como foi a operação?"></textarea>
 
 </div>
 
 
 <button type="submit">
-Salvar trade
+💾 Salvar Trade
 </button>
 
 </form>
@@ -771,68 +643,23 @@ Salvar trade
 
 <!-- TRADES -->
 
-<section id="list" class="view">
+<section id="trades" class="page">
 
 <div class="card">
 
-<h3>🔎 Filtros</h3>
+<h3>📋 Trades registrados</h3>
 
-<div class="filters">
-
-<select id="filterAsset">
-
-<option value="">
-Todos os ativos
-</option>
-
-</select>
-
-
-<select id="filterSetup">
-
-<option value="">
-Todos os setups
-</option>
-
-</select>
-
-
-<select id="filterSession">
-
-<option value="">
-Todas as sessões
-</option>
-
-</select>
-
-
-<select id="filterPlan">
-
-<option value="">
-Todos
-</option>
-
-<option>Sim</option>
-<option>Não</option>
-
-</select>
-
-</div>
+<div id="tradeList"></div>
 
 </div>
 
 
-<div class="card" id="tradeTable"></div>
-
-
 <div class="card">
 
-<button id="backupButton" class="secondary">
-⬇️ Exportar backup
-</button>
-
-<button id="deleteAllButton" class="danger">
-Apagar dados desta conta
+<button
+id="deleteAll"
+class="danger">
+Apagar todos os trades
 </button>
 
 </div>
@@ -844,224 +671,99 @@ Apagar dados desta conta
 
 <script>
 
-/* ==============================
-   BANCO DE DADOS
-============================== */
+/* =========================
+   BANCO
+========================= */
 
-const DATABASE_KEY = "tradeJournalV23";
-
-let accounts = [];
-
-let currentAccountId = null;
+const KEY =
+"TRADE_JOURNAL_PRO_V3";
 
 
-/* ==============================
-   CARREGAR DADOS
-============================== */
-
-function loadDatabase(){
-
-const saved =
-localStorage.getItem(DATABASE_KEY);
-
-
-if(saved){
-
-try{
-
-accounts =
-JSON.parse(saved);
-
-}catch(error){
-
-accounts = [];
-
-}
-
-}
-
-
-/* IMPORTAR V2 ANTIGA */
-
-if(
-!Array.isArray(accounts) ||
-accounts.length === 0
-){
-
-let oldTrades = [];
-
-try{
-
-oldTrades =
+let database =
 JSON.parse(
-localStorage.getItem("tjp_v2") || "[]"
+localStorage.getItem(KEY) || "null"
 );
 
-}catch(error){
 
-oldTrades = [];
+if(!database){
 
-}
+database = {
 
-
-accounts = [
+accounts:[
 
 {
-id:"account1",
+id:1,
 name:"Conta 1",
 currency:"USD",
-initialCapital:0,
-trades:
-Array.isArray(oldTrades)
-? oldTrades
-: []
+capital:0,
+trades:[]
 },
 
 {
-id:"account2",
+id:2,
 name:"Conta 2",
 currency:"USD",
-initialCapital:0,
+capital:0,
 trades:[]
 }
 
-];
+],
 
+current:1
+
+};
 
 saveDatabase();
 
 }
 
 
-const oldAccount =
-localStorage.getItem(
-"currentTradeAccount"
-);
-
-
-if(
-oldAccount &&
-accounts.some(
-a => a.id === oldAccount
-)
-){
-
-currentAccountId =
-oldAccount;
-
-}else{
-
-currentAccountId =
-accounts[0].id;
-
-}
-
-
-localStorage.setItem(
-"currentTradeAccount",
-currentAccountId
-);
-
-}
-
-
-/* ==============================
-   SALVAR BANCO
-============================== */
-
 function saveDatabase(){
 
 localStorage.setItem(
-DATABASE_KEY,
-JSON.stringify(accounts)
+KEY,
+JSON.stringify(database)
 );
 
 }
 
 
-/* ==============================
-   CONTA ATUAL
-============================== */
+function account(){
 
-function getAccount(){
-
-return accounts.find(
-account =>
-account.id === currentAccountId
+return database.accounts.find(
+a => a.id === database.current
 );
 
 }
 
 
-function getTrades(){
+function trades(){
 
-const account =
-getAccount();
-
-
-if(!account){
-
-return [];
+return account().trades;
 
 }
 
 
-if(!Array.isArray(account.trades)){
-
-account.trades = [];
-
-}
-
-
-return account.trades;
-
-}
-
-
-/* ==============================
+/* =========================
    MOEDA
-============================== */
+========================= */
 
-function getCurrencySymbol(){
+function money(value){
 
-const account =
-getAccount();
+const a =
+account();
 
-
-if(
-account &&
-account.currency === "JPY"
-){
-
-return "¥";
-
-}
-
-
-return "$";
-
-}
-
-
-function formatMoney(value){
-
-const number =
-Number(value || 0);
-
-
-if(
-getCurrencySymbol() === "¥"
-){
+if(a.currency === "JPY"){
 
 return "¥" +
-Math.round(number)
+Math.round(value)
 .toLocaleString("ja-JP");
 
 }
 
-
 return "$" +
-number.toLocaleString(
+Number(value)
+.toLocaleString(
 "en-US",
 {
 minimumFractionDigits:2,
@@ -1072,123 +774,40 @@ maximumFractionDigits:2
 }
 
 
-/* ==============================
-   ESTATÍSTICAS
-============================== */
-
-function calculateStats(trades){
-
-const wins =
-trades.filter(
-trade =>
-Number(trade.r) > 0
-);
-
-const losses =
-trades.filter(
-trade =>
-Number(trade.r) < 0
-);
-
-
-const grossWins =
-wins.reduce(
-(sum,trade) =>
-sum + Number(trade.r),
-0
-);
-
-
-const grossLosses =
-Math.abs(
-losses.reduce(
-(sum,trade) =>
-sum + Number(trade.r),
-0
-)
-);
-
-
-const totalR =
-trades.reduce(
-(sum,trade) =>
-sum + Number(trade.r),
-0
-);
-
-
-return {
-
-trades:trades.length,
-
-winRate:
-trades.length
-?
-wins.length /
-trades.length *
-100
-:
-0,
-
-totalR:totalR,
-
-profitFactor:
-grossLosses
-?
-grossWins /
-grossLosses
-:
-0
-
-};
-
-}
-
-
-/* ==============================
+/* =========================
    NAVEGAÇÃO
-============================== */
+========================= */
 
-function openView(id){
+function showPage(id){
 
 document
-.querySelectorAll(".view")
+.querySelectorAll(".page")
 .forEach(
-view =>
-view.classList.remove("on")
+p => p.classList.remove("active")
 );
 
-
-const target =
-document.getElementById(id);
-
-
-if(target){
-
-target.classList.add("on");
-
-}
-
+document
+.getElementById(id)
+.classList.add("active");
 
 document
 .querySelectorAll(".nav button")
 .forEach(
-button =>
-button.classList.toggle(
-"on",
-button.dataset.view === id
+b =>
+b.classList.toggle(
+"active",
+b.dataset.page === id
 )
 );
-
 
 render();
 
 }
 
 
-/* ==============================
+/* =========================
    CONTAS
-============================== */
+========================= */
 
 function renderAccounts(){
 
@@ -1197,440 +816,493 @@ document.getElementById(
 "accountSelect"
 );
 
-
 select.innerHTML =
-accounts.map(
-account =>
-
-`<option value="${account.id}">
-${escapeHTML(account.name)}
+database.accounts.map(
+a =>
+`<option value="${a.id}">
+${a.name}
 </option>`
-
 ).join("");
 
-
 select.value =
-currentAccountId;
-
-
-const account =
-getAccount();
-
-
-if(account){
-
-document.getElementById(
-"accountInfo"
-).textContent =
-
-"Conta ativa: " +
-account.name +
-" · " +
-getTrades().length +
-" trade(s)";
-
-}
+database.current;
 
 }
 
 
-function switchAccount(){
+document
+.getElementById("accountSelect")
+.addEventListener(
+"change",
+function(){
 
-currentAccountId =
-document.getElementById(
-"accountSelect"
-).value;
+database.current =
+Number(this.value);
 
-
-localStorage.setItem(
-"currentTradeAccount",
-currentAccountId
-);
-
+saveDatabase();
 
 render();
 
 }
-
-
-function createAccount(){
-
-let name =
-prompt(
-"Nome da nova conta:",
-"Conta " + (accounts.length + 1)
 );
 
 
-if(name === null){
+document
+.getElementById("addAccount")
+.addEventListener(
+"click",
+function(){
 
-return;
-
-}
-
-
-name =
-name.trim();
-
+const name =
+prompt(
+"Nome da nova conta:"
+);
 
 if(!name){
 
-alert(
-"Digite um nome."
-);
-
 return;
 
 }
 
+const id =
+Date.now();
 
-const newAccount = {
+database.accounts.push({
 
-id:
-"account_" +
-Date.now(),
+id:id,
 
 name:name,
 
 currency:"USD",
 
-initialCapital:0,
+capital:0,
 
 trades:[]
 
-};
+});
 
-
-accounts.push(newAccount);
-
-currentAccountId =
-newAccount.id;
-
+database.current =
+id;
 
 saveDatabase();
 
+render();
 
-localStorage.setItem(
-"currentTradeAccount",
-currentAccountId
+alert(
+"Conta criada!"
 );
 
+}
+);
+
+
+/* =========================
+   REGISTRO
+========================= */
+
+document
+.getElementById("tradeForm")
+.addEventListener(
+"submit",
+function(event){
+
+event.preventDefault();
+
+const trade = {
+
+id:Date.now(),
+
+date:
+new Date()
+.toLocaleDateString("pt-BR"),
+
+asset:
+document.getElementById("asset").value,
+
+side:
+document.getElementById("side").value,
+
+setup:
+document.getElementById("setup").value,
+
+timeframe:
+document.getElementById("timeframe").value,
+
+session:
+document.getElementById("session").value,
+
+r:
+Number(
+document.getElementById("r").value
+),
+
+money:
+Number(
+document.getElementById(
+"moneyValue"
+).value || 0
+),
+
+plan:
+document.getElementById("plan").value,
+
+note:
+document.getElementById("note").value
+
+};
+
+trades().unshift(trade);
+
+saveDatabase();
+
+this.reset();
+
+alert(
+"Trade salvo com sucesso!"
+);
+
+showPage("dashboard");
+
+}
+);
+
+
+/* =========================
+   CONFIGURAÇÃO
+========================= */
+
+document
+.getElementById("saveConfig")
+.addEventListener(
+"click",
+function(){
+
+const a =
+account();
+
+a.currency =
+document.getElementById(
+"currency"
+).value;
+
+a.capital =
+Number(
+document.getElementById(
+"capital"
+).value || 0
+);
+
+saveDatabase();
+
+render();
+
+alert(
+"Configuração salva!"
+);
+
+}
+);
+
+
+/* =========================
+   APAGAR TRADE
+========================= */
+
+function deleteTrade(id){
+
+const a =
+account();
+
+const trade =
+a.trades.find(
+t => t.id === id
+);
+
+if(!trade){
+
+return;
+
+}
+
+if(
+!confirm(
+"Apagar este trade?"
+)
+){
+
+return;
+
+}
+
+a.trades =
+a.trades.filter(
+t => t.id !== id
+);
+
+saveDatabase();
 
 render();
 
 }
 
 
-/* ==============================
+/* =========================
+   APAGAR TODOS
+========================= */
+
+document
+.getElementById("deleteAll")
+.addEventListener(
+"click",
+function(){
+
+if(!trades().length){
+
+return;
+
+}
+
+if(
+!confirm(
+"Apagar TODOS os trades desta conta?"
+)
+){
+
+return;
+
+}
+
+account().trades = [];
+
+saveDatabase();
+
+render();
+
+}
+);
+
+
+/* =========================
    DASHBOARD
-============================== */
+========================= */
 
 function renderDashboard(){
 
-const trades =
-getTrades();
+const list =
+trades();
 
+const total =
+list.length;
 
-const stats =
-calculateStats(trades);
+const wins =
+list.filter(
+t => t.r > 0
+).length;
+
+const losses =
+list.filter(
+t => t.r < 0
+);
+
+const totalR =
+list.reduce(
+(s,t) => s + t.r,
+0
+);
+
+const winRate =
+total
+?
+wins / total * 100
+:
+0;
+
+const grossWins =
+list
+.filter(t => t.r > 0)
+.reduce(
+(s,t) => s+t.r,
+0
+);
+
+const grossLoss =
+Math.abs(
+losses.reduce(
+(s,t) => s+t.r,
+0
+)
+);
+
+const pf =
+grossLoss
+?
+grossWins/grossLoss
+:
+0;
 
 
 document.getElementById(
 "totalTrades"
 ).textContent =
-stats.trades;
+total;
 
 
 document.getElementById(
 "winRate"
 ).textContent =
-stats.winRate.toFixed(1) + "%";
+winRate.toFixed(1)+"%";
 
 
-const rElement =
+const rEl =
 document.getElementById(
-"rResult"
+"totalR"
 );
 
+rEl.textContent =
+(totalR >= 0 ? "+" : "") +
+totalR.toFixed(1)+"R";
 
-rElement.textContent =
-(stats.totalR >= 0 ? "+" : "") +
-stats.totalR.toFixed(1) +
-"R";
-
-
-rElement.className =
-stats.totalR >= 0
-? "green"
-: "red";
+rEl.className =
+totalR >= 0
+?
+"green"
+:
+"red";
 
 
 document.getElementById(
 "profitFactor"
 ).textContent =
-stats.profitFactor
+pf
 ?
-stats.profitFactor.toFixed(2)
+pf.toFixed(2)
 :
 "0";
 
 
-const account =
-getAccount();
+const a =
+account();
 
-
-const initial =
-Number(
-account.initialCapital || 0
-);
-
-
-const result =
-trades.reduce(
-(sum,trade) =>
-sum + Number(trade.money || 0),
+const financial =
+list.reduce(
+(s,t) =>
+s + Number(t.money || 0),
 0
 );
 
-
 const current =
-initial + result;
+Number(a.capital || 0)
++
+financial;
 
 
 document.getElementById(
 "initialCapital"
 ).textContent =
-formatMoney(initial);
+money(a.capital || 0);
 
 
-const resultElement =
 document.getElementById(
-"financialResult"
-);
-
-
-resultElement.textContent =
-(result >= 0 ? "+" : "") +
-formatMoney(Math.abs(result));
-
-
-resultElement.className =
-result >= 0
-? "green"
-: "red";
+"moneyResult"
+).textContent =
+(financial >= 0 ? "+" : "") +
+money(Math.abs(financial));
 
 
 document.getElementById(
 "currentCapital"
 ).textContent =
-formatMoney(current);
+money(current);
 
 
 document.getElementById(
-"currencySelect"
+"currency"
 ).value =
-account.currency || "USD";
+a.currency;
 
 
 document.getElementById(
-"capitalInput"
+"capital"
 ).value =
-account.initialCapital || "";
+a.capital || "";
 
 
-renderBars(
-"setupBars",
-groupTrades("setup")
-);
-
-
-renderBars(
-"assetBars",
-groupTrades("asset")
-);
-
-
-renderBars(
-"sessionBars",
-groupTrades("session")
-);
-
-
-const outsidePlan =
-trades.filter(
-trade =>
-trade.plan === "Não"
-).length;
-
-
-document.getElementById(
-"discipline"
-).innerHTML =
-
-"Seguiu o plano: " +
-
-`<b class="green">${
-trades.length
-?
-(
-(trades.length-outsidePlan) /
-trades.length *
-100
-).toFixed(1)
-:
-0
-}%</b>` +
-
-`<br><span class="muted">
-${outsidePlan} trade(s) fora do plano
-</span>`;
-
+renderSetups();
 
 drawChart();
 
 }
 
 
-/* ==============================
-   GRUPOS
-============================== */
+/* =========================
+   SETUPS
+========================= */
 
-function groupTrades(key){
+function renderSetups(){
+
+const box =
+document.getElementById(
+"setupStats"
+);
 
 const groups = {};
 
+trades().forEach(
+t => {
 
-getTrades().forEach(
-trade => {
-
-const value =
-trade[key] || "Outro";
-
-
-if(!groups[value]){
-
-groups[value] = [];
-
+if(!groups[t.setup]){
+groups[t.setup] = [];
 }
 
-
-groups[value].push(trade);
+groups[t.setup].push(t);
 
 }
 );
 
+const keys =
+Object.keys(groups);
 
-return groups;
+if(!keys.length){
 
-}
-
-
-/* ==============================
-   BARRAS
-============================== */
-
-function renderBars(elementId,groups){
-
-const element =
-document.getElementById(
-elementId
-);
-
-
-const entries =
-Object.entries(groups);
-
-
-if(!entries.length){
-
-element.innerHTML =
-'<div class="empty">Sem dados ainda.</div>';
+box.innerHTML =
+'<div class="empty">Sem trades ainda.</div>';
 
 return;
 
 }
 
+box.innerHTML =
+keys.map(
+key => {
 
-const maximum =
-Math.max(
-1,
-...entries.map(
-entry =>
-Math.abs(
-calculateStats(entry[1]).totalR
-)
-)
-;
+const list =
+groups[key];
 
-
-element.innerHTML =
-
-entries
-.sort(
-(a,b) =>
-calculateStats(b[1]).totalR -
-calculateStats(a[1]).totalR
-)
-.map(
-entry => {
-
-const name =
-entry[0];
-
-
-const stats =
-calculateStats(entry[1]);
-
-
-const width =
-Math.min(
-100,
-Math.abs(stats.totalR) /
-maximum *
-100
+const r =
+list.reduce(
+(s,t) => s+t.r,
+0
 );
-
 
 return `
 
-<div class="bar">
+<div style="margin-bottom:10px">
 
-<div class="barhead">
+<div style="
+display:flex;
+justify-content:space-between;
+font-size:12px">
 
-<span>
-${escapeHTML(name)}
-</span>
+<span>${key}</span>
 
 <b class="${
-stats.totalR >= 0
-? "green"
-: "red"
+r >= 0 ? "green" : "red"
 }">
 
-${stats.totalR > 0 ? "+" : ""}
-${stats.totalR.toFixed(1)}R
-
-·
-
-${stats.winRate.toFixed(0)}%
+${r >= 0 ? "+" : ""}
+${r.toFixed(1)}R
 
 </b>
-
-</div>
-
-<div class="track">
-
-<div
-class="fill"
-style="
-width:${width}%;
-background:${
-stats.totalR >= 0
-? "var(--green)"
-: "var(--red)"
-};
-">
-</div>
 
 </div>
 
@@ -1639,47 +1311,155 @@ stats.totalR >= 0
 `;
 
 }
-)
-.join("");
+).join("");
 
 }
 
 
-/* ==============================
+/* =========================
+   LISTA
+========================= */
+
+function renderTrades(){
+
+const box =
+document.getElementById(
+"tradeList"
+);
+
+const list =
+trades();
+
+if(!list.length){
+
+box.innerHTML =
+'<div class="empty">Nenhum trade registrado.</div>';
+
+return;
+
+}
+
+box.innerHTML = `
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Data</th>
+<th>Ativo</th>
+<th>Setup</th>
+<th>R</th>
+<th>Dinheiro</th>
+<th></th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${
+
+list.map(
+t => `
+
+<tr>
+
+<td>${t.date}</td>
+
+<td>${t.asset}</td>
+
+<td>${t.setup}</td>
+
+<td class="${
+t.r >= 0
+?
+"green"
+:
+"red"
+}">
+
+${t.r >= 0 ? "+" : ""}
+${t.r}R
+
+</td>
+
+<td class="${
+t.money >= 0
+?
+"green"
+:
+"red"
+}">
+
+${t.money >= 0 ? "+" : ""}
+${money(t.money)}
+
+</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="danger"
+onclick="deleteTrade(${t.id})">
+
+🗑️
+
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`
+).join("")
+
+}
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================
    GRÁFICO
-============================== */
+========================= */
 
 function drawChart(){
 
 const canvas =
 document.getElementById(
-"equityChart"
+"chart"
 );
-
 
 const ctx =
 canvas.getContext("2d");
 
-
-const ratio =
-window.devicePixelRatio || 1;
-
-
 const width =
-canvas.clientWidth * ratio;
-
+canvas.clientWidth;
 
 const height =
-canvas.clientHeight * ratio;
-
+canvas.clientHeight;
 
 canvas.width =
 width;
 
-
 canvas.height =
 height;
-
 
 ctx.clearRect(
 0,
@@ -1688,49 +1468,40 @@ width,
 height
 );
 
+const list =
+trades();
 
-const trades =
-getTrades();
-
-
-if(!trades.length){
+if(!list.length){
 
 return;
 
 }
 
-
 let values = [0];
 
 let total = 0;
 
-
-trades
+list
 .slice()
 .reverse()
 .forEach(
-trade => {
+t => {
 
-total +=
-Number(trade.r);
+total += t.r;
 
 values.push(total);
 
 }
 );
 
-
 const min =
 Math.min(...values);
-
 
 const max =
 Math.max(...values);
 
-
 const range =
-max - min || 1;
-
+max-min || 1;
 
 ctx.strokeStyle =
 "#4e8cff";
@@ -1739,29 +1510,25 @@ ctx.lineWidth = 3;
 
 ctx.beginPath();
 
-
 values.forEach(
-(value,index) => {
+(v,i) => {
 
 const x =
-index /
-(values.length - 1 || 1) *
+i /
+(values.length-1 || 1)
+*
 width;
-
 
 const y =
 height -
 (
-(value-min) /
-range
-) *
-height *
-0.8 -
-height *
-0.1;
+(v-min)/range
+*
+height*.8
+) -
+height*.1;
 
-
-if(index === 0){
+if(i===0){
 
 ctx.moveTo(x,y);
 
@@ -1774,693 +1541,14 @@ ctx.lineTo(x,y);
 }
 );
 
-
 ctx.stroke();
 
 }
 
 
-/* ==============================
-   FILTROS
-============================== */
-
-function renderFilters(){
-
-const trades =
-getTrades();
-
-
-fillFilter(
-"filterAsset",
-"asset",
-"Todos os ativos"
-);
-
-
-fillFilter(
-"filterSetup",
-"setup",
-"Todos os setups"
-);
-
-
-fillFilter(
-"filterSession",
-"session",
-"Todas as sessões"
-);
-
-}
-
-
-function fillFilter(id,key,defaultText){
-
-const select =
-document.getElementById(id);
-
-
-const current =
-select.value;
-
-
-const values =
-[
-...new Set(
-getTrades()
-.map(
-trade =>
-trade[key]
-)
-.filter(Boolean)
-)
-];
-
-
-select.innerHTML =
-`<option value="">
-${defaultText}
-</option>` +
-
-values.map(
-value =>
-`<option value="${escapeHTML(value)}">
-${escapeHTML(value)}
-</option>`
-).join("");
-
-
-select.value =
-values.includes(current)
-? current
-: "";
-
-}
-
-
-/* ==============================
-   TABELA
-============================== */
-
-function renderTable(){
-
-const assetFilter =
-document.getElementById(
-"filterAsset"
-).value;
-
-
-const setupFilter =
-document.getElementById(
-"filterSetup"
-).value;
-
-
-const sessionFilter =
-document.getElementById(
-"filterSession"
-).value;
-
-
-const planFilter =
-document.getElementById(
-"filterPlan"
-).value;
-
-
-const trades =
-getTrades().filter(
-trade =>
-
-(!assetFilter ||
-trade.asset === assetFilter)
-
-&&
-
-(!setupFilter ||
-trade.setup === setupFilter)
-
-&&
-
-(!sessionFilter ||
-trade.session === sessionFilter)
-
-&&
-
-(!planFilter ||
-trade.plan === planFilter)
-);
-
-
-const table =
-document.getElementById(
-"tradeTable"
-);
-
-
-if(!trades.length){
-
-table.innerHTML =
-'<div class="empty">Nenhum trade.</div>';
-
-return;
-
-}
-
-
-table.innerHTML =
-
-`<div style="overflow:auto">
-
-<table>
-
-<tr>
-
-<th>Data</th>
-<th>Ativo</th>
-<th>Setup</th>
-<th>R</th>
-<th>Dinheiro</th>
-<th>Plano</th>
-<th>Ações</th>
-
-</tr>
-
-${
-trades.map(
-trade => `
-
-<tr>
-
-<td>
-${escapeHTML(trade.date)}
-</td>
-
-<td>
-${escapeHTML(trade.asset)}
-</td>
-
-<td>
-${escapeHTML(trade.setup)}
-</td>
-
-<td class="${
-Number(trade.r) > 0
-? "green"
-: Number(trade.r) < 0
-? "red"
-: ""
-}">
-
-${Number(trade.r) > 0 ? "+" : ""}
-${Number(trade.r).toFixed(1)}R
-
-</td>
-
-<td class="${
-Number(trade.money) > 0
-? "green"
-: Number(trade.money) < 0
-? "red"
-: ""
-}">
-
-${Number(trade.money) > 0 ? "+" : ""}
-${formatMoney(trade.money || 0)}
-
-</td>
-
-<td>
-${escapeHTML(trade.plan)}
-</td>
-
-<td>
-
-<button
-class="secondary action"
-data-edit="${trade.id}">
-✏️
-</button>
-
-<button
-class="danger action"
-data-delete="${trade.id}">
-🗑️
-</button>
-
-</td>
-
-</tr>
-
-`
-).join("")
-}
-
-</table>
-
-</div>`;
-
-}
-
-
-/* ==============================
-   SALVAR TRADE
-============================== */
-
-function submitTrade(event){
-
-event.preventDefault();
-
-
-const rInput =
-document.getElementById(
-"rValue"
-);
-
-
-if(rInput.value === ""){
-
-alert(
-"Digite o resultado em R."
-);
-
-return;
-
-}
-
-
-const conditions =
-Array.from(
-document.querySelectorAll(
-".check input:checked"
-)
-)
-.map(
-input =>
-input.value
-);
-
-
-const trade = {
-
-id:
-String(Date.now()),
-
-date:
-new Date()
-.toISOString()
-.slice(0,10),
-
-asset:
-document.getElementById(
-"asset"
-).value,
-
-side:
-document.getElementById(
-"side"
-).value,
-
-setup:
-document.getElementById(
-"setup"
-).value,
-
-tf:
-document.getElementById(
-"timeframe"
-).value,
-
-session:
-document.getElementById(
-"session"
-).value,
-
-r:
-Number(
-rInput.value
-),
-
-plan:
-document.getElementById(
-"plan"
-).value,
-
-money:
-Number(
-document.getElementById(
-"moneyValue"
-).value || 0
-),
-
-conditions:
-conditions,
-
-note:
-document.getElementById(
-"note"
-).value
-
-};
-
-
-getTrades().unshift(
-trade
-);
-
-
-saveDatabase();
-
-
-document.getElementById(
-"tradeForm"
-).reset();
-
-
-alert(
-"Trade salvo com sucesso!"
-);
-
-
-openView("dash");
-
-}
-
-
-/* ==============================
-   EDITAR TRADE
-============================== */
-
-function editTrade(id){
-
-const trade =
-getTrades().find(
-item =>
-String(item.id) === String(id)
-);
-
-
-if(!trade){
-
-return;
-
-}
-
-
-const newR =
-prompt(
-"Resultado em R:",
-trade.r
-);
-
-
-if(newR === null){
-
-return;
-
-}
-
-
-const r =
-Number(newR);
-
-
-if(!Number.isFinite(r)){
-
-alert(
-"Valor inválido."
-);
-
-return;
-
-}
-
-
-const newMoney =
-prompt(
-"Resultado financeiro:",
-trade.money || 0
-);
-
-
-if(newMoney === null){
-
-return;
-
-}
-
-
-const money =
-Number(newMoney);
-
-
-if(!Number.isFinite(money)){
-
-alert(
-"Valor inválido."
-);
-
-return;
-
-}
-
-
-trade.r = r;
-
-trade.money = money;
-
-
-saveDatabase();
-
-
-render();
-
-}
-
-
-/* ==============================
-   APAGAR UM TRADE
-============================== */
-
-function deleteTrade(id){
-
-const account =
-getAccount();
-
-
-const trade =
-account.trades.find(
-item =>
-String(item.id) === String(id)
-);
-
-
-if(!trade){
-
-return;
-
-}
-
-
-const confirmDelete =
-confirm(
-
-"Excluir este trade?\n\n" +
-
-trade.date +
-" · " +
-trade.asset +
-"\n" +
-
-(
-Number(trade.r) >= 0
-? "+"
-: ""
-) +
-
-trade.r +
-"R"
-
-);
-
-
-if(!confirmDelete){
-
-return;
-
-}
-
-
-account.trades =
-account.trades.filter(
-item =>
-String(item.id) !== String(id)
-);
-
-
-saveDatabase();
-
-
-render();
-
-}
-
-
-/* ==============================
-   APAGAR TODOS
-============================== */
-
-function deleteAll(){
-
-const account =
-getAccount();
-
-
-if(!account.trades.length){
-
-alert(
-"Não há trades nesta conta."
-);
-
-return;
-
-}
-
-
-if(
-!confirm(
-"Tem certeza que deseja apagar TODOS os trades desta conta?"
-)
-){
-
-return;
-
-}
-
-
-account.trades = [];
-
-
-saveDatabase();
-
-
-render();
-
-}
-
-
-/* ==============================
-   CONFIGURAÇÃO
-============================== */
-
-function saveSettings(){
-
-const account =
-getAccount();
-
-
-account.currency =
-document.getElementById(
-"currencySelect"
-).value;
-
-
-account.initialCapital =
-Number(
-document.getElementById(
-"capitalInput"
-).value || 0
-);
-
-
-saveDatabase();
-
-
-render();
-
-
-alert(
-"Configuração salva!"
-);
-
-}
-
-
-/* ==============================
-   BACKUP
-============================== */
-
-function createBackup(){
-
-const backup = {
-
-version:"2.3",
-
-date:
-new Date().toISOString(),
-
-accounts:accounts
-
-};
-
-
-const blob =
-new Blob(
-[
-JSON.stringify(
-backup,
-null,
-2
-)
-],
-{
-type:"application/json"
-}
-);
-
-
-const url =
-URL.createObjectURL(blob);
-
-
-const a =
-document.createElement("a");
-
-
-a.href = url;
-
-a.download =
-"trade-journal-backup.json";
-
-
-a.click();
-
-
-URL.revokeObjectURL(url);
-
-}
-
-
-/* ==============================
-   SEGURANÇA HTML
-============================== */
-
-function escapeHTML(value){
-
-return String(
-value ?? ""
-)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
-}
-
-
-/* ==============================
-   RENDER PRINCIPAL
-============================== */
+/* =========================
+   RENDER
+========================= */
 
 function render(){
 
@@ -2468,19 +1556,30 @@ renderAccounts();
 
 renderDashboard();
 
-renderFilters();
-
-renderTable();
+renderTrades();
 
 }
 
 
-/* ==============================
-   EVENTOS
-============================== */
+/* =========================
+   BOTÃO RÁPIDO
+========================= */
+
+document
+.getElementById("quickTrade")
+.addEventListener(
+"click",
+function(){
+
+showPage("register");
+
+}
+);
 
 
-/* MENU */
+/* =========================
+   MENU
+========================= */
 
 document
 .querySelectorAll(".nav button")
@@ -2491,8 +1590,8 @@ button.addEventListener(
 "click",
 function(){
 
-openView(
-this.dataset.view
+showPage(
+this.dataset.page
 );
 
 }
@@ -2502,205 +1601,9 @@ this.dataset.view
 );
 
 
-/* BOTÃO + TRADE */
-
-document
-.getElementById(
-"newTradeButton"
-)
-.addEventListener(
-"click",
-function(){
-
-openView("new");
-
-}
-);
-
-
-/* CONTAS */
-
-document
-.getElementById(
-"accountSelect"
-)
-.addEventListener(
-"change",
-switchAccount
-);
-
-
-document
-.getElementById(
-"newAccountButton"
-)
-.addEventListener(
-"click",
-createAccount
-);
-
-
-/* SALVAR TRADE */
-
-document
-.getElementById(
-"tradeForm"
-)
-.addEventListener(
-"submit",
-submitTrade
-);
-
-
-/* CONFIGURAÇÃO */
-
-document
-.getElementById(
-"saveSettingsButton"
-)
-.addEventListener(
-"click",
-saveSettings
-);
-
-
-/* FILTROS */
-
-[
-"filterAsset",
-"filterSetup",
-"filterSession",
-"filterPlan"
-]
-.forEach(
-id => {
-
-document
-.getElementById(id)
-.addEventListener(
-"change",
-renderTable
-);
-
-}
-);
-
-
-/* EDITAR / APAGAR */
-
-document
-.getElementById(
-"tradeTable"
-)
-.addEventListener(
-"click",
-function(event){
-
-const edit =
-event.target.closest(
-"[data-edit]"
-);
-
-
-const del =
-event.target.closest(
-"[data-delete]"
-);
-
-
-if(edit){
-
-editTrade(
-edit.dataset.edit
-);
-
-}
-
-
-if(del){
-
-deleteTrade(
-del.dataset.delete
-);
-
-}
-
-}
-);
-
-
-/* BACKUP */
-
-document
-.getElementById(
-"backupButton"
-)
-.addEventListener(
-"click",
-createBackup
-);
-
-
-/* APAGAR TODOS */
-
-document
-.getElementById(
-"deleteAllButton"
-)
-.addEventListener(
-"click",
-deleteAll
-);
-
-
-/* ==============================
-   PWA
-============================== */
-
-let deferredPrompt = null;
-
-
-window.addEventListener(
-"beforeinstallprompt",
-function(event){
-
-event.preventDefault();
-
-deferredPrompt = event;
-
-
-const button =
-document.getElementById(
-"installButton"
-);
-
-
-button.style.display =
-"block";
-
-
-button.onclick =
-function(){
-
-if(deferredPrompt){
-
-deferredPrompt.prompt();
-
-deferredPrompt = null;
-
-}
-
-};
-
-}
-);
-
-
-/* ==============================
+/* =========================
    INICIAR
-============================== */
-
-loadDatabase();
+========================= */
 
 render();
 
