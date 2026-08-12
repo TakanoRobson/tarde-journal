@@ -1191,36 +1191,69 @@ table.innerHTML=
 <th>Setup</th>
 <th>R</th>
 <th>Plano</th>
+<th>Ações</th>
 </tr>
 
+function filterTable(){
+let data=getData();
+let a=data.filter(
+x=>
+(!fa.value||x.asset===fa.value)&&
+(!fs.value||x.setup===fs.value)&&
+(!fss.value||x.session===fss.value)&&
+(!fp.value||x.plan===fp.value)
+);
+if(!a.length){
+table.innerHTML=
+'<div class="empty">Nenhum trade.</div>';
+return;
+}
+table.innerHTML=
+`<div style="overflow:auto">
+<table>
+<tr>
+<th>Data</th>
+<th>Ativo</th>
+<th>Setup</th>
+<th>R</th>
+<th>Plano</th>
+<th>Ações</th>
+</tr>
 ${a.map(
 x=>`
-
 <tr>
-
 <td>${x.date}</td>
-
 <td>${x.asset}</td>
-
 <td>${x.setup}</td>
-
 <td class="${x.r>0
 ?'green'
 :x.r<0
 ?'red'
 :''}">
-
 ${x.r>0?'+':''}
 ${x.r.toFixed(1)}R
-
 </td>
-
 <td>${x.plan}</td>
-
+<td>
+<button
+class="secondary"
+style="padding:7px 9px"
+onclick="editTrade(${x.id})">
+✏️
+</button>
+<button
+class="danger"
+style="padding:7px 9px;margin-left:4px"
+onclick="deleteTrade(${x.id})">
+🗑️
+</button>
+</td>
 </tr>
-
 `
 ).join('')}
+</table>
+</div>`;
+}
 
 </table>
 
@@ -1304,7 +1337,65 @@ filterTable
 )
 );
 
-
+/* =========================
+   EDITAR TRADE
+========================= */
+function editTrade(id){
+let data=getData();
+let trade=data.find(
+x=>x.id===id
+);
+if(!trade)return;
+let novoR=prompt(
+'Resultado em R:',
+trade.r
+);
+if(novoR===null)return;
+novoR=parseFloat(novoR);
+if(isNaN(novoR)){
+alert('Digite um número válido.');
+return;
+}
+let novaObs=prompt(
+'Observação:',
+trade.note||''
+);
+if(novaObs!==null){
+trade.note=novaObs;
+}
+trade.r=novoR;
+saveAccounts();
+render();
+alert('Trade atualizado!');
+}
+/* =========================
+   EXCLUIR TRADE
+========================= */
+function deleteTrade(id){
+let data=getData();
+let trade=data.find(
+x=>x.id===id
+);
+if(!trade)return;
+let confirma=confirm(
+'Excluir este trade?\\n\\n'+
+trade.date+
+' · '+
+trade.asset+
+' · '+
+(trade.r>0?'+':'')+
+trade.r+
+'R'
+);
+if(!confirma)return;
+currentAccount().trades=
+data.filter(
+x=>x.id!==id
+);
+saveAccounts();
+render();
+alert('Trade excluído.');
+}
 /* BACKUP */
 
 function exportData(){
