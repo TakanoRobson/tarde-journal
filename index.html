@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#080d18">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<meta name="theme-color"
+content="#080d18">
+
 <title>Trade Journal Pro V4</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+box-sizing:border-box
+}
 
 body{
 margin:0;
@@ -32,10 +42,18 @@ background:#4e8cff;
 cursor:pointer
 }
 
-button.secondary{background:#17233b}
-button.danger{background:#3a1820;color:#ff9baa}
+button.secondary{
+background:#17233b
+}
 
-input,select,textarea{
+button.danger{
+background:#3a1820;
+color:#ff9baa
+}
+
+input,
+select,
+textarea{
 width:100%;
 padding:11px;
 border-radius:9px;
@@ -45,7 +63,9 @@ color:#eef3ff;
 font-size:14px
 }
 
-textarea{min-height:80px}
+textarea{
+min-height:80px
+}
 
 label{
 display:block;
@@ -59,7 +79,9 @@ font-size:23px;
 font-weight:850
 }
 
-.logo span{color:#4e8cff}
+.logo span{
+color:#4e8cff
+}
 
 .top{
 display:flex;
@@ -86,7 +108,9 @@ grid-template-columns:1fr 1fr;
 gap:9px
 }
 
-.field{margin-bottom:10px}
+.field{
+margin-bottom:10px
+}
 
 .nav{
 display:grid;
@@ -105,8 +129,13 @@ background:#4e8cff;
 color:white
 }
 
-.page{display:none}
-.page.active{display:block}
+.page{
+display:none
+}
+
+.page.active{
+display:block
+}
 
 .stats{
 display:grid;
@@ -132,9 +161,17 @@ font-size:23px;
 margin-top:4px
 }
 
-.green{color:#35d58a}
-.red{color:#ff6378}
-.muted{color:#8996b4}
+.green{
+color:#35d58a
+}
+
+.red{
+color:#ff6378
+}
+
+.muted{
+color:#8996b4
+}
 
 .accountbar{
 display:grid;
@@ -176,14 +213,17 @@ border-collapse:collapse;
 font-size:12px
 }
 
-th,td{
+th,
+td{
 padding:8px 5px;
 border-bottom:1px solid #26334f;
 text-align:left;
 white-space:nowrap
 }
 
-th{color:#8996b4}
+th{
+color:#8996b4
+}
 
 .empty{
 text-align:center;
@@ -228,259 +268,565 @@ color:#8996b4;
 margin-bottom:12px
 }
 
-@media(min-width:650px){
-.stats{grid-template-columns:repeat(4,1fr)}
+
+/* ===============================
+MODAL EDITAR
+================================ */
+
+#editModal{
+
+display:none;
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.78);
+
+z-index:9999;
+
+padding:20px;
+
+overflow:auto
+
 }
+
+.editBox{
+
+max-width:520px;
+
+margin:25px auto;
+
+background:#111a2d;
+
+border:1px solid #26334f;
+
+border-radius:16px;
+
+padding:18px
+
+}
+
+.editHeader{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:15px
+
+}
+
+.editHeader h3{
+
+margin:0
+
+}
+
+.editButtons{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:8px;
+
+margin-top:10px
+
+}
+
+@media(min-width:650px){
+
+.stats{
+grid-template-columns:repeat(4,1fr)
+}
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
-<!-- LOGIN -->
+
+<!-- =====================================
+LOGIN
+===================================== -->
 
 <main id="loginPage">
 
 <div class="card">
 
 <div class="logo">
+
 Trade<span>Journal</span> Pro
+
 </div>
 
 <p class="muted">
+
 Seu diário de trades sincronizado na nuvem.
+
 </p>
 
-<div class="field">
-<label>E-mail</label>
-<input id="email" type="email" placeholder="seu@email.com">
-</div>
 
 <div class="field">
-<label>Senha</label>
-<input id="password" type="password" placeholder="Mínimo 6 caracteres">
+
+<label>E-mail</label>
+
+<input
+id="email"
+type="email"
+placeholder="seu@email.com">
+
 </div>
+
+
+<div class="field">
+
+<label>Senha</label>
+
+<input
+id="password"
+type="password"
+placeholder="Mínimo 6 caracteres">
+
+</div>
+
 
 <div style="display:grid;gap:8px">
 
 <button id="loginBtn">
+
 Entrar
+
 </button>
 
-<button id="signupBtn" class="secondary">
+
+<button
+id="signupBtn"
+class="secondary">
+
 Criar nova conta
+
 </button>
 
 </div>
 
-<div id="authStatus" class="status muted"></div>
+
+<div
+id="authStatus"
+class="status muted">
+
+</div>
 
 </div>
 
 </main>
 
 
-<!-- APLICAÇÃO -->
+
+<!-- =====================================
+APLICAÇÃO
+===================================== -->
 
 <main id="app">
+
 
 <div class="top">
 
 <div>
 
 <div class="logo">
+
 Trade<span>Journal</span> Pro
-</div>
-
-<div id="userInfo" class="userInfo"></div>
 
 </div>
 
-<button id="logoutBtn" class="secondary">
+<div
+id="userInfo"
+class="userInfo">
+
+</div>
+
+</div>
+
+
+<button
+id="logoutBtn"
+class="secondary">
+
 Sair
+
 </button>
 
 </div>
+
 
 
 <!-- CONTAS -->
 
 <div class="accountbar">
 
-<select id="accountSelect"></select>
+<select id="accountSelect">
+
+</select>
+
 
 <button id="addAccount">
+
 ＋ Conta
+
 </button>
 
 </div>
+
 
 
 <!-- MENU -->
 
 <div class="nav">
 
-<button class="active" data-page="dashboard">
+<button
+class="active"
+data-page="dashboard">
+
 Dashboard
+
 </button>
 
-<button data-page="register">
+
+<button
+data-page="register">
+
 Registrar
+
 </button>
 
-<button data-page="trades">
+
+<button
+data-page="trades">
+
 Trades
+
 </button>
 
 </div>
 
 
-<!-- DASHBOARD -->
 
-<section id="dashboard" class="page active">
+<!-- =====================================
+DASHBOARD
+===================================== -->
+
+<section
+id="dashboard"
+class="page active">
+
 
 <div class="stats">
 
+
 <div class="stat">
+
 <small>TRADES</small>
-<strong id="totalTrades">0</strong>
+
+<strong
+id="totalTrades">
+
+0
+
+</strong>
+
 </div>
 
+
 <div class="stat">
+
 <small>WIN RATE</small>
-<strong id="winRate">0%</strong>
+
+<strong
+id="winRate">
+
+0%
+
+</strong>
+
 </div>
 
+
 <div class="stat">
+
 <small>RESULTADO</small>
-<strong id="totalR">0R</strong>
+
+<strong
+id="totalR">
+
+0R
+
+</strong>
+
 </div>
+
 
 <div class="stat">
+
 <small>PROFIT FACTOR</small>
-<strong id="profitFactor">0</strong>
-</div>
+
+<strong
+id="profitFactor">
+
+0
+
+</strong>
 
 </div>
+
+
+</div>
+
 
 
 <div class="card">
 
-<h3>💰 Financeiro</h3>
+<h3>
+
+💰 Financeiro
+
+</h3>
+
 
 <div class="money">
 
-<div>
-<small>CAPITAL INICIAL</small>
-<strong id="initialCapital">$0</strong>
-</div>
 
 <div>
-<small>RESULTADO</small>
-<strong id="moneyResult">$0</strong>
+
+<small>
+
+CAPITAL INICIAL
+
+</small>
+
+<strong id="initialCapital">
+
+$0
+
+</strong>
+
 </div>
+
 
 <div>
-<small>CAPITAL ATUAL</small>
-<strong id="currentCapital">$0</strong>
+
+<small>
+
+RESULTADO
+
+</small>
+
+<strong id="moneyResult">
+
+$0
+
+</strong>
+
 </div>
+
+
+<div>
+
+<small>
+
+CAPITAL ATUAL
+
+</small>
+
+<strong id="currentCapital">
+
+$0
+
+</strong>
+
+</div>
+
 
 </div>
 
 </div>
+
 
 
 <div class="card">
 
-<h3>⚙️ Configuração da conta</h3>
+<h3>
+
+⚙️ Configuração da conta
+
+</h3>
+
 
 <div class="row">
+
 
 <div class="field">
 
 <label>Moeda</label>
 
 <select id="currency">
-<option value="USD">USD — Dólar</option>
-<option value="JPY">JPY — Iene</option>
+
+<option value="USD">
+
+USD — Dólar
+
+</option>
+
+<option value="JPY">
+
+JPY — Iene
+
+</option>
+
 </select>
 
 </div>
+
 
 <div class="field">
 
 <label>Capital inicial</label>
 
-<input id="capital" type="number" step="0.01">
+<input
+id="capital"
+type="number"
+step="0.01">
 
 </div>
 
+
 </div>
+
 
 <button id="saveConfig">
+
 Salvar configuração
+
 </button>
 
 </div>
 
 
+
 <div class="card">
 
-<h3>📈 Equity Curve</h3>
+<h3>
+
+📈 Equity Curve
+
+</h3>
 
 <canvas id="chart"></canvas>
 
 </div>
 
 
+
 <div class="card">
 
-<h3>🏆 Resultado por Setup</h3>
+<h3>
+
+🏆 Resultado por Setup
+
+</h3>
 
 <div id="setupStats"></div>
 
 </div>
 
 
+
 <div class="card">
 
-<h3>📊 Resultado por Ativo</h3>
+<h3>
+
+📊 Resultado por Ativo
+
+</h3>
 
 <div id="assetStats"></div>
 
 </div>
 
 
+
 <div class="card">
 
-<h3>🕒 Resultado por Sessão</h3>
+<h3>
+
+🕒 Resultado por Sessão
+
+</h3>
 
 <div id="sessionStats"></div>
 
 </div>
 
 
+
 <div class="card">
 
-<h3>🧠 Disciplina</h3>
+<h3>
+
+🧠 Disciplina
+
+</h3>
 
 <div id="disciplineStats"></div>
 
 </div>
 
+
 </section>
 
 
-<!-- REGISTRO -->
 
-<section id="register" class="page">
+<!-- =====================================
+REGISTRAR
+===================================== -->
+
+<section
+id="register"
+class="page">
+
 
 <div class="card">
 
-<h3>📝 Registrar Trade</h3>
+<h3>
+
+📝 Registrar Trade
+
+</h3>
+
 
 <form id="tradeForm">
 
+
 <div class="row">
+
+
+<div class="field">
+
+<label>Data</label>
+
+<input
+id="tradeDate"
+type="date">
+
+</div>
+
 
 <div class="field">
 
@@ -489,15 +835,27 @@ Salvar configuração
 <select id="asset">
 
 <option>XAUUSD</option>
+
 <option>US100</option>
+
 <option>BTC</option>
+
 <option>ETH</option>
+
 <option>SOL</option>
+
 <option>us500</option>
 
 </select>
 
 </div>
+
+</div>
+
+
+
+<div class="row">
+
 
 <div class="field">
 
@@ -506,16 +864,13 @@ Salvar configuração
 <select id="side">
 
 <option>Compra</option>
+
 <option>Venda</option>
 
 </select>
 
 </div>
 
-</div>
-
-
-<div class="row">
 
 <div class="field">
 
@@ -524,17 +879,31 @@ Salvar configuração
 <select id="setup">
 
 <option>BOS + Reteste</option>
+
 <option>Sweep + BOS</option>
+
 <option>BOS + FVG</option>
+
 <option>FVG</option>
+
 <option>Order Block</option>
+
 <option>Alvarinho</option>
+
 <option>Divergência RSI</option>
+
 <option>divap</option>
 
 </select>
 
 </div>
+
+</div>
+
+
+
+<div class="row">
+
 
 <div class="field">
 
@@ -543,18 +912,17 @@ Salvar configuração
 <select id="timeframe">
 
 <option>1m</option>
+
 <option>5m</option>
+
 <option>15m</option>
+
 <option>1H</option>
 
 </select>
 
 </div>
 
-</div>
-
-
-<div class="row">
 
 <div class="field">
 
@@ -563,13 +931,23 @@ Salvar configuração
 <select id="session">
 
 <option>Ásia</option>
+
 <option>Londres</option>
+
 <option>Nova York</option>
+
 <option>Londres/NY</option>
 
 </select>
 
 </div>
+
+</div>
+
+
+
+<div class="row">
+
 
 <div class="field">
 
@@ -584,23 +962,6 @@ required>
 
 </div>
 
-</div>
-
-
-<div class="row">
-
-<div class="field">
-
-<label>Plano</label>
-
-<select id="plan">
-
-<option>Sim</option>
-<option>Não</option>
-
-</select>
-
-</div>
 
 <div class="field">
 
@@ -617,6 +978,23 @@ placeholder="25 ou -15">
 </div>
 
 
+
+<div class="field">
+
+<label>Plano</label>
+
+<select id="plan">
+
+<option>Sim</option>
+
+<option>Não</option>
+
+</select>
+
+</div>
+
+
+
 <div class="field">
 
 <label>Observação</label>
@@ -629,8 +1007,11 @@ placeholder="Erro, FOMO, saída antecipada, entrada perfeita etc."></textarea>
 
 
 <button type="submit">
+
 💾 Salvar Trade
+
 </button>
+
 
 </form>
 
@@ -639,44 +1020,326 @@ placeholder="Erro, FOMO, saída antecipada, entrada perfeita etc."></textarea>
 </section>
 
 
-<!-- TRADES -->
 
-<section id="trades" class="page">
+<!-- =====================================
+TRADES
+===================================== -->
+
+<section
+id="trades"
+class="page">
+
 
 <div class="card">
 
-<h3>📋 Histórico de Trades</h3>
+<h3>
+
+📋 Histórico de Trades
+
+</h3>
+
 
 <div id="tradeList"></div>
 
 </div>
 
 
+
 <div class="card">
 
-<button id="deleteAll" class="danger">
+<button
+id="deleteAll"
+class="danger">
+
 Apagar todos os trades
+
 </button>
 
 </div>
 
+
 </section>
+
 
 </main>
 
 
+
+<!-- =====================================
+MODAL EDITAR
+===================================== -->
+
+<div id="editModal">
+
+
+<div class="editBox">
+
+
+<div class="editHeader">
+
+<h3>
+
+✏️ Editar Trade
+
+</h3>
+
+
+<button
+type="button"
+class="secondary"
+onclick="closeEdit()">
+
+✕
+
+</button>
+
+</div>
+
+
+
+<input
+type="hidden"
+id="editId">
+
+
+
+<div class="row">
+
+
+<div class="field">
+
+<label>Data</label>
+
+<input
+id="editDate"
+type="date">
+
+</div>
+
+
+<div class="field">
+
+<label>Ativo</label>
+
+<select id="editAsset">
+
+<option>XAUUSD</option>
+
+<option>US100</option>
+
+<option>BTC</option>
+
+<option>ETH</option>
+
+<option>SOL</option>
+
+<option>us500</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+
+<div class="row">
+
+
+<div class="field">
+
+<label>Direção</label>
+
+<select id="editSide">
+
+<option>Compra</option>
+
+<option>Venda</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>Setup</label>
+
+<select id="editSetup">
+
+<option>BOS + Reteste</option>
+
+<option>Sweep + BOS</option>
+
+<option>BOS + FVG</option>
+
+<option>FVG</option>
+
+<option>Order Block</option>
+
+<option>Alvarinho</option>
+
+<option>Divergência RSI</option>
+
+<option>divap</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+
+<div class="row">
+
+
+<div class="field">
+
+<label>Timeframe</label>
+
+<select id="editTimeframe">
+
+<option>1m</option>
+
+<option>5m</option>
+
+<option>15m</option>
+
+<option>1H</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>Sessão</label>
+
+<select id="editSession">
+
+<option>Ásia</option>
+
+<option>Londres</option>
+
+<option>Nova York</option>
+
+<option>Londres/NY</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+
+<div class="row">
+
+
+<div class="field">
+
+<label>Resultado (R)</label>
+
+<input
+id="editR"
+type="number"
+step="0.1">
+
+</div>
+
+
+<div class="field">
+
+<label>Resultado financeiro</label>
+
+<input
+id="editMoney"
+type="number"
+step="0.01">
+
+</div>
+
+</div>
+
+
+
+<div class="field">
+
+<label>Seguiu o plano?</label>
+
+<select id="editPlan">
+
+<option>Sim</option>
+
+<option>Não</option>
+
+</select>
+
+</div>
+
+
+
+<div class="field">
+
+<label>Observação</label>
+
+<textarea
+id="editNote"
+placeholder="Escreva aqui o que aconteceu nesse trade..."></textarea>
+
+</div>
+
+
+
+<div class="editButtons">
+
+
+<button
+type="button"
+onclick="saveEdit()">
+
+💾 Salvar alterações
+
+</button>
+
+
+<button
+type="button"
+class="secondary"
+onclick="closeEdit()">
+
+Cancelar
+
+</button>
+
+</div>
+
+
+<div
+id="editStatus"
+class="status muted">
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
 <script>
 
-/* =========================================
-   SUPABASE
-========================================= */
+
+/* =====================================
+SUPABASE
+===================================== */
 
 const SUPABASE_URL =
 "https://mxstmkxwukbhoainzomo.supabase.co";
 
-/*
- COLE SUA PUBLISHABLE KEY ABAIXO
-*/
 
 const SUPABASE_KEY =
 "sb_publishable_xsPcp9na6-L1g5eb8r_ccw_mudszQUx";
@@ -691,15 +1354,17 @@ let currentAccount=null;
 let trades=[];
 
 
-/* =========================================
-   CARREGAR SUPABASE
-========================================= */
+
+/* =====================================
+CARREGAR SUPABASE
+===================================== */
 
 const supabaseScript =
 document.createElement("script");
 
 supabaseScript.src =
 "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+
 
 supabaseScript.onload=function(){
 
@@ -713,28 +1378,37 @@ startApp();
 
 };
 
+
 document.head.appendChild(
 supabaseScript
 );
 
 
-/* =========================================
-   ELEMENTOS
-========================================= */
+
+/* =====================================
+ELEMENTOS
+===================================== */
 
 const loginPage =
-document.getElementById("loginPage");
+document.getElementById(
+"loginPage"
+);
 
 const app =
-document.getElementById("app");
+document.getElementById(
+"app"
+);
 
 const authStatus =
-document.getElementById("authStatus");
+document.getElementById(
+"authStatus"
+);
 
 
-/* =========================================
-   INICIAR
-========================================= */
+
+/* =====================================
+INICIAR
+===================================== */
 
 async function startApp(){
 
@@ -742,6 +1416,7 @@ const {
 data
 }=
 await sb.auth.getSession();
+
 
 if(data.session){
 
@@ -753,8 +1428,12 @@ showLogin();
 
 }
 
+
 sb.auth.onAuthStateChange(
-async function(event,session){
+async function(
+event,
+session
+){
 
 if(session){
 
@@ -771,29 +1450,37 @@ showLogin();
 }
 
 
+
 function showLogin(){
 
-loginPage.style.display="block";
+loginPage.style.display=
+"block";
 
-app.style.display="none";
+app.style.display=
+"none";
 
 }
 
 
-/* =========================================
-   ABRIR APP
-========================================= */
+
+/* =====================================
+ABRIR APP
+===================================== */
 
 async function openApp(){
 
-loginPage.style.display="none";
+loginPage.style.display=
+"none";
 
-app.style.display="block";
+app.style.display=
+"block";
+
 
 const {
 data:userData
 }=
 await sb.auth.getUser();
+
 
 if(userData.user){
 
@@ -804,14 +1491,16 @@ userData.user.email;
 
 }
 
+
 await loadAccounts();
 
 }
 
 
-/* =========================================
-   CRIAR USUÁRIO
-========================================= */
+
+/* =====================================
+CRIAR CONTA
+===================================== */
 
 document
 .getElementById("signupBtn")
@@ -824,10 +1513,12 @@ document.getElementById(
 "email"
 ).value.trim();
 
+
 const password=
 document.getElementById(
 "password"
 ).value;
+
 
 if(!email){
 
@@ -838,6 +1529,7 @@ return;
 
 }
 
+
 if(password.length<6){
 
 authStatus.textContent=
@@ -847,17 +1539,23 @@ return;
 
 }
 
+
 authStatus.textContent=
 "Criando conta...";
+
 
 const {
 data,
 error
 }=
 await sb.auth.signUp({
+
 email:email,
+
 password:password
+
 });
+
 
 if(error){
 
@@ -867,6 +1565,7 @@ error.message;
 return;
 
 }
+
 
 if(data.session){
 
@@ -878,16 +1577,17 @@ await openApp();
 }else{
 
 authStatus.textContent=
-"Conta criada. Verifique seu e-mail para confirmar o cadastro.";
+"Conta criada. Verifique seu e-mail.";
 
 }
 
 });
 
 
-/* =========================================
-   LOGIN
-========================================= */
+
+/* =====================================
+LOGIN
+===================================== */
 
 document
 .getElementById("loginBtn")
@@ -900,10 +1600,12 @@ document.getElementById(
 "email"
 ).value.trim();
 
+
 const password=
 document.getElementById(
 "password"
 ).value;
+
 
 if(!email || !password){
 
@@ -914,16 +1616,22 @@ return;
 
 }
 
+
 authStatus.textContent=
 "Entrando...";
+
 
 const {
 error
 }=
 await sb.auth.signInWithPassword({
+
 email:email,
+
 password:password
+
 });
+
 
 if(error){
 
@@ -934,14 +1642,16 @@ return;
 
 }
 
+
 authStatus.textContent="";
 
 });
 
 
-/* =========================================
-   SAIR
-========================================= */
+
+/* =====================================
+LOGOUT
+===================================== */
 
 document
 .getElementById("logoutBtn")
@@ -954,9 +1664,10 @@ await sb.auth.signOut();
 });
 
 
-/* =========================================
-   CONTAS
-========================================= */
+
+/* =====================================
+CONTAS
+===================================== */
 
 async function loadAccounts(){
 
@@ -974,6 +1685,7 @@ ascending:true
 }
 );
 
+
 if(error){
 
 alert(
@@ -985,12 +1697,16 @@ return;
 
 }
 
-accounts=data||[];
+
+accounts=
+data||[];
+
 
 const select=
 document.getElementById(
 "accountSelect"
 );
+
 
 select.innerHTML="";
 
@@ -1003,6 +1719,7 @@ return;
 
 }
 
+
 accounts.forEach(
 account=>{
 
@@ -1011,11 +1728,14 @@ document.createElement(
 "option"
 );
 
+
 option.value=
 account.id;
 
+
 option.textContent=
 account.name;
+
 
 select.appendChild(
 option
@@ -1027,8 +1747,10 @@ option
 currentAccount=
 accounts[0].id;
 
+
 select.value=
 currentAccount;
+
 
 await loadTrades();
 
@@ -1037,9 +1759,10 @@ render();
 }
 
 
-/* =========================================
-   PRIMEIRA CONTA
-========================================= */
+
+/* =====================================
+PRIMEIRA CONTA
+===================================== */
 
 async function createFirstAccount(){
 
@@ -1048,11 +1771,13 @@ data:userData
 }=
 await sb.auth.getUser();
 
+
 if(!userData.user){
 
 return;
 
 }
+
 
 const {
 data,
@@ -1078,6 +1803,7 @@ initial_capital:
 .select()
 .single();
 
+
 if(error){
 
 alert(
@@ -1089,19 +1815,26 @@ return;
 
 }
 
-accounts=[data];
 
-currentAccount=data.id;
+accounts=
+[data];
+
+
+currentAccount=
+data.id;
+
 
 const select=
 document.getElementById(
 "accountSelect"
 );
 
+
 select.innerHTML=
 `<option value="${data.id}">
 Conta 1
 </option>`;
+
 
 await loadTrades();
 
@@ -1110,9 +1843,10 @@ render();
 }
 
 
-/* =========================================
-   ADICIONAR CONTA
-========================================= */
+
+/* =====================================
+ADICIONAR CONTA
+===================================== */
 
 document
 .getElementById("addAccount")
@@ -1125,16 +1859,19 @@ prompt(
 "Nome da nova conta:"
 );
 
+
 if(!name){
 
 return;
 
 }
 
+
 const {
 data:userData
 }=
 await sb.auth.getUser();
+
 
 const {
 data,
@@ -1157,6 +1894,7 @@ initial_capital:0
 .select()
 .single();
 
+
 if(error){
 
 alert(
@@ -1168,14 +1906,18 @@ return;
 
 }
 
+
 accounts.push(data);
 
-currentAccount=data.id;
+currentAccount=
+data.id;
+
 
 const select=
 document.getElementById(
 "accountSelect"
 );
+
 
 select.innerHTML=
 accounts
@@ -1187,8 +1929,10 @@ ${escapeHtml(a.name)}
 )
 .join("");
 
+
 select.value=
 currentAccount;
+
 
 await loadTrades();
 
@@ -1197,9 +1941,10 @@ render();
 });
 
 
-/* =========================================
-   TROCAR CONTA
-========================================= */
+
+/* =====================================
+TROCAR CONTA
+===================================== */
 
 document
 .getElementById("accountSelect")
@@ -1217,9 +1962,10 @@ render();
 });
 
 
-/* =========================================
-   CARREGAR TRADES
-========================================= */
+
+/* =====================================
+CARREGAR TRADES
+===================================== */
 
 async function loadTrades(){
 
@@ -1230,6 +1976,7 @@ trades=[];
 return;
 
 }
+
 
 const {
 data,
@@ -1249,6 +1996,7 @@ ascending:false
 }
 );
 
+
 if(error){
 
 alert(
@@ -1260,16 +2008,20 @@ return;
 
 }
 
-trades=data||[];
+
+trades=
+data||[];
+
 
 render();
 
 }
 
 
-/* =========================================
-   SALVAR TRADE
-========================================= */
+
+/* =====================================
+SALVAR TRADE
+===================================== */
 
 document
 .getElementById("tradeForm")
@@ -1278,6 +2030,7 @@ document
 async function(e){
 
 e.preventDefault();
+
 
 if(!currentAccount){
 
@@ -1289,10 +2042,12 @@ return;
 
 }
 
+
 const {
 data:userData
 }=
 await sb.auth.getUser();
+
 
 if(!userData.user){
 
@@ -1304,6 +2059,16 @@ return;
 
 }
 
+
+const date =
+document.getElementById(
+"tradeDate"
+).value ||
+new Date()
+.toISOString()
+.slice(0,10);
+
+
 const trade={
 
 user_id:
@@ -1311,6 +2076,9 @@ userData.user.id,
 
 account_id:
 currentAccount,
+
+trade_date:
+date,
 
 asset:
 document.getElementById(
@@ -1363,12 +2131,14 @@ document.getElementById(
 
 };
 
+
 const {
 error
 }=
 await sb
 .from("trades")
 .insert(trade);
+
 
 if(error){
 
@@ -1381,22 +2151,37 @@ return;
 
 }
 
+
 this.reset();
+
+
+document.getElementById(
+"tradeDate"
+).value=
+new Date()
+.toISOString()
+.slice(0,10);
+
 
 await loadTrades();
 
-showPage("dashboard");
+
+showPage(
+"dashboard"
+);
+
 
 alert(
-"Trade salvo com sucesso na nuvem!"
+"Trade salvo com sucesso!"
 );
 
 });
 
 
-/* =========================================
-   CONFIGURAÇÃO
-========================================= */
+
+/* =====================================
+CONFIGURAÇÃO
+===================================== */
 
 document
 .getElementById("saveConfig")
@@ -1410,10 +2195,12 @@ return;
 
 }
 
+
 const currency=
 document.getElementById(
 "currency"
 ).value;
+
 
 const capital=
 Number(
@@ -1421,6 +2208,7 @@ document.getElementById(
 "capital"
 ).value||0
 );
+
 
 const {
 error
@@ -1441,6 +2229,7 @@ capital
 currentAccount
 );
 
+
 if(error){
 
 alert(
@@ -1451,6 +2240,7 @@ error.message
 return;
 
 }
+
 
 accounts=
 accounts.map(
@@ -1467,7 +2257,9 @@ initial_capital:capital
 a
 );
 
+
 render();
+
 
 alert(
 "Configuração salva!"
@@ -1476,9 +2268,10 @@ alert(
 });
 
 
-/* =========================================
-   APAGAR TRADE
-========================================= */
+
+/* =====================================
+APAGAR TRADE
+===================================== */
 
 async function deleteTrade(id){
 
@@ -1491,6 +2284,7 @@ if(
 return;
 
 }
+
 
 const {
 error
@@ -1507,6 +2301,7 @@ id
 currentAccount
 );
 
+
 if(error){
 
 alert(
@@ -1518,14 +2313,16 @@ return;
 
 }
 
+
 await loadTrades();
 
 }
 
 
-/* =========================================
-   APAGAR TODOS
-========================================= */
+
+/* =====================================
+APAGAR TODOS
+===================================== */
 
 document
 .getElementById("deleteAll")
@@ -1539,6 +2336,7 @@ return;
 
 }
 
+
 if(
 !confirm(
 "Apagar TODOS os trades desta conta?"
@@ -1548,6 +2346,7 @@ if(
 return;
 
 }
+
 
 const {
 error
@@ -1560,6 +2359,7 @@ await sb
 currentAccount
 );
 
+
 if(error){
 
 alert(
@@ -1571,14 +2371,16 @@ return;
 
 }
 
+
 await loadTrades();
 
 });
 
 
-/* =========================================
-   NAVEGAÇÃO
-========================================= */
+
+/* =====================================
+NAVEGAÇÃO
+===================================== */
 
 function showPage(id){
 
@@ -1591,11 +2393,13 @@ page.classList.remove(
 )
 );
 
+
 document
 .getElementById(id)
 .classList.add(
 "active"
 );
+
 
 document
 .querySelectorAll(".nav button")
@@ -1606,6 +2410,7 @@ button.classList.toggle(
 button.dataset.page===id
 )
 );
+
 
 render();
 
@@ -1630,32 +2435,36 @@ this.dataset.page
 });
 
 
-/* =========================================
-   MOEDA
-========================================= */
+
+/* =====================================
+MOEDA
+===================================== */
 
 function money(value){
 
-const a=
+const account=
 accounts.find(
 x=>
 String(x.id)===
 String(currentAccount)
 );
 
+
 if(
-a &&
-a.currency==="JPY"
+account &&
+account.currency==="JPY"
 ){
 
 return "¥"+
 Math.round(
 Number(value)
-).toLocaleString(
+)
+.toLocaleString(
 "ja-JP"
 );
 
 }
+
 
 return "$"+
 Number(value)
@@ -1670,20 +2479,23 @@ maximumFractionDigits:2
 }
 
 
-/* =========================================
-   DASHBOARD
-========================================= */
+
+/* =====================================
+DASHBOARD
+===================================== */
 
 function renderDashboard(){
 
 const total=
 trades.length;
 
+
 const wins=
 trades.filter(
 t=>
 Number(t.result_r)>0
 ).length;
+
 
 const totalR=
 trades.reduce(
@@ -1692,6 +2504,7 @@ sum+
 Number(t.result_r),
 0
 );
+
 
 const grossWins=
 trades
@@ -1705,6 +2518,7 @@ sum+
 Number(t.result_r),
 0
 );
+
 
 const grossLoss=
 Math.abs(
@@ -1721,12 +2535,14 @@ Number(t.result_r),
 )
 );
 
+
 const winRate=
 total
 ?
 wins/total*100
 :
 0;
+
 
 const pf=
 grossLoss
@@ -1741,19 +2557,23 @@ document.getElementById(
 ).textContent=
 total;
 
+
 document.getElementById(
 "winRate"
 ).textContent=
 winRate.toFixed(1)+"%";
+
 
 const rElement=
 document.getElementById(
 "totalR"
 );
 
+
 rElement.textContent=
 (totalR>=0?"+":"")+
 totalR.toFixed(1)+"R";
+
 
 rElement.className=
 totalR>=0
@@ -1761,6 +2581,7 @@ totalR>=0
 "green"
 :
 "red";
+
 
 document.getElementById(
 "profitFactor"
@@ -1779,11 +2600,13 @@ String(a.id)===
 String(currentAccount)
 );
 
+
 if(!account){
 
 return;
 
 }
+
 
 const financial=
 trades.reduce(
@@ -1792,6 +2615,7 @@ sum+
 Number(t.money_result||0),
 0
 );
+
 
 const current=
 Number(
@@ -1807,16 +2631,22 @@ money(
 account.initial_capital||0
 );
 
+
 const moneyElement=
 document.getElementById(
 "moneyResult"
 );
 
+
 moneyElement.textContent=
-(financial>=0?"+":"")+
-money(
-Math.abs(financial)
-);
+financial>=0
+?
+"+"+
+money(financial)
+:
+"-"+
+money(Math.abs(financial));
+
 
 moneyElement.className=
 financial>=0
@@ -1825,46 +2655,55 @@ financial>=0
 :
 "red";
 
+
 document.getElementById(
 "currentCapital"
 ).textContent=
 money(current);
+
 
 document.getElementById(
 "currency"
 ).value=
 account.currency;
 
+
 document.getElementById(
 "capital"
 ).value=
 account.initial_capital||"";
+
 
 renderGroup(
 "setupStats",
 "setup"
 );
 
+
 renderGroup(
 "assetStats",
 "asset"
 );
+
 
 renderGroup(
 "sessionStats",
 "session"
 );
 
+
 renderDiscipline();
+
 
 drawChart();
 
 }
 
 
-/* =========================================
-   GRUPOS
-========================================= */
+
+/* =====================================
+GRUPOS
+===================================== */
 
 function renderGroup(
 elementId,
@@ -1876,7 +2715,9 @@ document.getElementById(
 elementId
 );
 
+
 const groups={};
+
 
 trades.forEach(
 trade=>{
@@ -1884,16 +2725,22 @@ trade=>{
 const key=
 trade[field]||"Outro";
 
+
 if(!groups[key]){
+
 groups[key]=[];
+
 }
+
 
 groups[key].push(trade);
 
 });
 
 
-if(!Object.keys(groups).length){
+if(
+!Object.keys(groups).length
+){
 
 box.innerHTML=
 '<div class="empty">Sem dados ainda.</div>';
@@ -1901,6 +2748,7 @@ box.innerHTML=
 return;
 
 }
+
 
 box.innerHTML=
 Object.entries(groups)
@@ -1915,16 +2763,36 @@ Number(t.result_r),
 0
 );
 
+
+const wins=
+list.filter(
+t=>
+Number(t.result_r)>0
+).length;
+
+
+const winRate=
+list.length
+?
+wins/list.length*100
+:
+0;
+
+
 return `
 
 <div style="
-display:flex;
-justify-content:space-between;
 padding:9px 0;
 border-bottom:1px solid #26334f">
 
+<div style="
+display:flex;
+justify-content:space-between">
+
 <span>
+
 ${escapeHtml(key)}
+
 </span>
 
 <b class="${
@@ -1942,6 +2810,17 @@ ${r.toFixed(1)}R
 
 </div>
 
+<div class="muted"
+style="font-size:11px;margin-top:3px">
+
+${list.length} trade(s)
+·
+${winRate.toFixed(0)}% win rate
+
+</div>
+
+</div>
+
 `;
 
 }
@@ -1951,9 +2830,10 @@ ${r.toFixed(1)}R
 }
 
 
-/* =========================================
-   DISCIPLINA
-========================================= */
+
+/* =====================================
+DISCIPLINA
+===================================== */
 
 function renderDiscipline(){
 
@@ -1961,6 +2841,7 @@ const box=
 document.getElementById(
 "disciplineStats"
 );
+
 
 if(!trades.length){
 
@@ -1971,16 +2852,19 @@ return;
 
 }
 
+
 const followed=
 trades.filter(
 t=>
 t.plan==="Sim"
 ).length;
 
+
 const percentage=
 followed/
 trades.length*
 100;
+
 
 box.innerHTML=`
 
@@ -2002,7 +2886,8 @@ ${percentage.toFixed(1)}%
 
 </div>
 
-<div class="muted" style="margin-top:5px">
+<div class="muted"
+style="margin-top:5px">
 
 ${followed} de ${trades.length} trades
 
@@ -2013,9 +2898,10 @@ ${followed} de ${trades.length} trades
 }
 
 
-/* =========================================
-   LISTA
-========================================= */
+
+/* =====================================
+LISTA DE TRADES
+===================================== */
 
 function renderTrades(){
 
@@ -2023,6 +2909,7 @@ const box=
 document.getElementById(
 "tradeList"
 );
+
 
 if(!trades.length){
 
@@ -2032,6 +2919,7 @@ box.innerHTML=
 return;
 
 }
+
 
 box.innerHTML=`
 
@@ -2044,82 +2932,143 @@ box.innerHTML=`
 <tr>
 
 <th>Data</th>
+
 <th>Ativo</th>
+
 <th>Setup</th>
+
 <th>R</th>
+
 <th>Dinheiro</th>
-<th></th>
+
+<th>Ações</th>
 
 </tr>
 
 </thead>
 
+
 <tbody>
 
 ${
-trades
-.map(
-trade=>`
+trades.map(
+trade=>{
+
+const result=
+Number(
+trade.result_r||0
+);
+
+
+const moneyResult=
+Number(
+trade.money_result||0
+);
+
+
+return `
 
 <tr>
 
 <td>
-${trade.trade_date}
+
+${trade.trade_date||"-"}
+
 </td>
+
 
 <td>
-${escapeHtml(trade.asset)}
-</td>
 
-<td>
-${escapeHtml(trade.setup)}
-</td>
-
-<td class="${
-Number(trade.result_r)>=0
-?
-"green"
-:
-"red"
-}">
-
-${Number(trade.result_r)>=0?"+":""}
-${Number(trade.result_r).toFixed(1)}R
-
-</td>
-
-<td class="${
-Number(trade.money_result)>=0
-?
-"green"
-:
-"red"
-}">
-
-${Number(trade.money_result)>=0?"+":""}
-${money(
-Number(trade.money_result)
+${escapeHtml(
+trade.asset
 )}
 
 </td>
 
+
 <td>
+
+${escapeHtml(
+trade.setup
+)}
+
+</td>
+
+
+<td class="${
+result>=0
+?
+"green"
+:
+"red"
+}">
+
+${result>=0?"+":""}
+${result.toFixed(1)}R
+
+</td>
+
+
+<td class="${
+moneyResult>=0
+?
+"green"
+:
+"red"
+}">
+
+${moneyResult>=0?"+":""}
+${money(
+Math.abs(moneyResult)
+)}
+
+</td>
+
+
+<td>
+
+<div class="actions">
+
+
+<button
+class="secondary"
+onclick="viewTrade('${trade.id}')"
+title="Ver observação">
+
+👁️
+
+</button>
+
+
+<button
+onclick="editTrade('${trade.id}')"
+title="Editar trade">
+
+✏️
+
+</button>
+
 
 <button
 class="danger"
-onclick="deleteTrade('${trade.id}')">
+onclick="deleteTrade('${trade.id}')"
+title="Apagar trade">
 
 🗑️
 
 </button>
 
+
+</div>
+
 </td>
 
 </tr>
 
-`
-)
-.join("")
+`;
+
+}
+).join("")
 }
 
 </tbody>
@@ -2133,9 +3082,337 @@ onclick="deleteTrade('${trade.id}')">
 }
 
 
-/* =========================================
-   GRÁFICO
-========================================= */
+
+/* =====================================
+VER OBSERVAÇÃO
+===================================== */
+
+function viewTrade(id){
+
+const trade=
+trades.find(
+t=>
+String(t.id)===
+String(id)
+);
+
+
+if(!trade){
+
+return;
+
+}
+
+
+const observation=
+trade.note &&
+trade.note.trim()
+?
+trade.note
+:
+"Sem observação registrada.";
+
+
+alert(
+
+"📋 DETALHES DO TRADE\n\n"+
+
+"Data: "+
+(trade.trade_date||"-")+
+
+"\nAtivo: "+
+(trade.asset||"-")+
+
+"\nDireção: "+
+(trade.side||"-")+
+
+"\nSetup: "+
+(trade.setup||"-")+
+
+"\nTimeframe: "+
+(trade.timeframe||"-")+
+
+"\nSessão: "+
+(trade.session||"-")+
+
+"\nResultado: "+
+(trade.result_r||0)+
+"R"+
+
+"\nPlano: "+
+(trade.plan||"-")+
+
+"\n\n📝 OBSERVAÇÃO\n\n"+
+
+observation
+
+);
+
+}
+
+
+
+/* =====================================
+EDITAR TRADE
+===================================== */
+
+function editTrade(id){
+
+const trade=
+trades.find(
+t=>
+String(t.id)===
+String(id)
+);
+
+
+if(!trade){
+
+alert(
+"Trade não encontrado."
+);
+
+return;
+
+}
+
+
+document.getElementById(
+"editId"
+).value=
+trade.id;
+
+
+document.getElementById(
+"editDate"
+).value=
+trade.trade_date||"";
+
+
+document.getElementById(
+"editAsset"
+).value=
+trade.asset||"";
+
+
+document.getElementById(
+"editSide"
+).value=
+trade.side||"Compra";
+
+
+document.getElementById(
+"editSetup"
+).value=
+trade.setup||"";
+
+
+document.getElementById(
+"editTimeframe"
+).value=
+trade.timeframe||"5m";
+
+
+document.getElementById(
+"editSession"
+).value=
+trade.session||"Nova York";
+
+
+document.getElementById(
+"editR"
+).value=
+trade.result_r??"";
+
+
+document.getElementById(
+"editMoney"
+).value=
+trade.money_result??"";
+
+
+document.getElementById(
+"editPlan"
+).value=
+trade.plan||"Sim";
+
+
+document.getElementById(
+"editNote"
+).value=
+trade.note||"";
+
+
+document.getElementById(
+"editStatus"
+).textContent=
+"";
+
+
+document.getElementById(
+"editModal"
+).style.display=
+"block";
+
+}
+
+
+
+/* =====================================
+FECHAR EDITOR
+===================================== */
+
+function closeEdit(){
+
+document.getElementById(
+"editModal"
+).style.display=
+"none";
+
+}
+
+
+
+/* =====================================
+SALVAR EDIÇÃO
+===================================== */
+
+async function saveEdit(){
+
+const id=
+document.getElementById(
+"editId"
+).value;
+
+
+if(!id){
+
+return;
+
+}
+
+
+const status=
+document.getElementById(
+"editStatus"
+);
+
+
+status.textContent=
+"Salvando...";
+
+
+const updates={
+
+trade_date:
+document.getElementById(
+"editDate"
+).value,
+
+asset:
+document.getElementById(
+"editAsset"
+).value,
+
+side:
+document.getElementById(
+"editSide"
+).value,
+
+setup:
+document.getElementById(
+"editSetup"
+).value,
+
+timeframe:
+document.getElementById(
+"editTimeframe"
+).value,
+
+session:
+document.getElementById(
+"editSession"
+).value,
+
+result_r:
+Number(
+document.getElementById(
+"editR"
+).value
+),
+
+money_result:
+Number(
+document.getElementById(
+"editMoney"
+).value||0
+),
+
+plan:
+document.getElementById(
+"editPlan"
+).value,
+
+note:
+document.getElementById(
+"editNote"
+).value
+
+};
+
+
+const {
+error
+}=
+await sb
+.from("trades")
+.update(updates)
+.eq(
+"id",
+id
+)
+.eq(
+"account_id",
+currentAccount
+);
+
+
+if(error){
+
+console.error(error);
+
+status.textContent=
+"Erro: "+
+error.message;
+
+return;
+
+}
+
+
+status.textContent=
+"✓ Trade atualizado!";
+
+
+await loadTrades();
+
+
+setTimeout(
+function(){
+
+closeEdit();
+
+},
+500
+);
+
+}
+
+
+
+/* =====================================
+EQUITY CURVE
+===================================== */
 
 function drawChart(){
 
@@ -2144,23 +3421,33 @@ document.getElementById(
 "chart"
 );
 
+
 if(!canvas){
 
 return;
 
 }
 
+
 const ctx=
 canvas.getContext("2d");
+
 
 const width=
 canvas.clientWidth||300;
 
+
 const height=
 canvas.clientHeight||180;
 
-canvas.width=width;
-canvas.height=height;
+
+canvas.width=
+width;
+
+
+canvas.height=
+height;
+
 
 ctx.clearRect(
 0,
@@ -2169,15 +3456,18 @@ width,
 height
 );
 
+
 if(!trades.length){
 
 return;
 
 }
 
+
 let values=[0];
 
 let total=0;
+
 
 trades
 .slice()
@@ -2186,27 +3476,37 @@ trades
 trade=>{
 
 total+=
-Number(trade.result_r);
+Number(
+trade.result_r
+);
+
 
 values.push(total);
 
 });
 
+
 const min=
 Math.min(...values);
+
 
 const max=
 Math.max(...values);
 
+
 const range=
 max-min||1;
+
 
 ctx.strokeStyle=
 "#4e8cff";
 
+
 ctx.lineWidth=3;
 
+
 ctx.beginPath();
+
 
 values.forEach(
 (value,index)=>{
@@ -2217,52 +3517,84 @@ index/
 *
 width;
 
+
 const y=
 height-
 (
 (value-min)/
-range
-*
+range*
 height*.8
 )-
 height*.1;
 
+
 if(index===0){
 
-ctx.moveTo(x,y);
+ctx.moveTo(
+x,
+y
+);
 
 }else{
 
-ctx.lineTo(x,y);
+ctx.lineTo(
+x,
+y
+);
 
 }
 
 });
+
 
 ctx.stroke();
 
 }
 
 
-/* =========================================
-   SEGURANÇA HTML
-========================================= */
+
+/* =====================================
+ESCAPAR HTML
+===================================== */
 
 function escapeHtml(text){
 
-return String(text??"")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+return String(
+text??""
+)
+
+.replace(
+/&/g,
+"&amp;"
+)
+
+.replace(
+/</g,
+"&lt;"
+)
+
+.replace(
+/>/g,
+"&gt;"
+)
+
+.replace(
+/"/g,
+"&quot;"
+)
+
+.replace(
+/'/g,
+"&#039;"
+);
 
 }
 
 
-/* =========================================
-   RENDER
-========================================= */
+
+/* =====================================
+RENDER
+===================================== */
 
 function render(){
 
@@ -2272,7 +3604,21 @@ renderTrades();
 
 }
 
+
+
+/* =====================================
+DATA ATUAL
+===================================== */
+
+document.getElementById(
+"tradeDate"
+).value=
+new Date()
+.toISOString()
+.slice(0,10);
+
 </script>
 
 </body>
+
 </html>
